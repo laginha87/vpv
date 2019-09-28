@@ -1,0 +1,22 @@
+{
+  "name": "vpv",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "parcel": "^1.12.3",
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.1",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.8",
+    "hygen": "^4.0.9",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  }
+}
