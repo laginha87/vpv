@@ -1,5 +1,5 @@
 ---
-to: app/<%=name%>/ducks/index.ts
+to: src/compoents/<%=h.changeCase.pascalCase(name)%>/ducks/index.ts
 ---
 
 import reducer from "./reducers";
