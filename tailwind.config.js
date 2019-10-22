@@ -18,6 +18,9 @@ module.exports = {
       '1': 100,
       '4': 400,
       '10': 1000
+    },
+    boxShadow: {
+      shadow: '0px 4px 4px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.04)',
     }
   },
   variants: {},
