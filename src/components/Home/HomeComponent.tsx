@@ -30,7 +30,7 @@ const campaign = {
 
 const campaigns : Campaign[] = Array(10).fill(campaign);
 
-const CampaignCard = ({campaign: {number_of_voluntaries,name, distance, end_date, percentage_complete}} : {campaign: Campaign}) => (<div className='rounded shadow p-5 mb-4'>
+export const CampaignCard = ({campaign: {number_of_voluntaries,name, distance, end_date, percentage_complete}} : {campaign: Campaign}) => (<div className='rounded shadow p-5 mb-4'>
   <div className='text-grey-900 font-bold text-xl mb-2'>{name}</div>
   <div className="bg-grey-300 text-grey-800 font-bold mb-2 text-xs px-3 py-1 rounded"><Icon icon="people"/> Há {number_of_voluntaries} voluntários envolvidos na campanha</div>
   <div className="text-grey-500 mb-2 text-xs font-medium">Estás a {distance} minutos de carro</div>
@@ -56,4 +56,4 @@ export const HomeComponent = (props : HomeProps) => {
       {campaigns && campaigns.map((e) => <CampaignCard campaign={e}/>)}
     </div>
   </div>;
-}
+};

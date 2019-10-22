@@ -11,4 +11,4 @@ export const Icon = (props : {icon: IconNames}) => {
     return <div className='inline-block'>
         <img className='h-4' src={IconImages[props.icon]} alt=""/>
     </div>
-}
+};
