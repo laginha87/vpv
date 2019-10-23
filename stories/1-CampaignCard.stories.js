@@ -5,7 +5,7 @@ import '../src/tailwind.css';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 
-const stories = storiesOf('Storybook Knobs', module);
+const stories = storiesOf('Campaign Card', module);
 
 
 stories.add('as dynamic variables', () => {

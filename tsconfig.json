@@ -15,7 +15,8 @@
         ],
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "noImplicitAny": false
+        "noImplicitAny": false,
     },
+    "include": ["tailwind.config.js"],
     "exclude": ["node_modules/"]
 }
