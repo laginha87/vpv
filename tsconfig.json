@@ -15,8 +15,18 @@
         ],
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "noImplicitAny": false,
+        "noImplicitAny": false
     },
-    "include": ["tailwind.config.js"],
-    "exclude": ["node_modules/"]
+    "include": [
+        "tailwind.config.js",
+        "./src/**/*",
+        "./stories/**/*"
+    ],
+    "exclude": [
+        "node_modules/"
+    ],
+    "files": [
+        "tailwind.config.d.ts",
+        "declaration.d.ts"
+    ]
 }
