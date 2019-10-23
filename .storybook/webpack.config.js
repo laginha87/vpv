@@ -23,25 +23,33 @@ module.exports = async ({ config, mode }) => {
     include: path.resolve(__dirname, "../")
   });
 
-    config.module.rules.push({
-        test: /\.(ts|tsx)$/,
-        use: [
-          {
-            // Typescript compiler
-            loader: require.resolve('awesome-typescript-loader'),
-          },
-          {
-            // Webpack loader to generate docgen information from Typescript React components.
-            loader: require.resolve('react-docgen-typescript-loader'),
-          },
-        ],
-      });
+  config.module.rules.push({
+    test: /\.(png|svg|jpg|gif)$/,
+    use: {
+      loader: require.resolve('file-loader')
+    }
+  })
 
-    config.resolve.extensions.push('.ts', '.tsx');
+  config.module.rules.push({
+    test: /\.(ts|tsx)$/,
+    use: [
+      {
+        // Typescript compiler
+        loader: require.resolve('awesome-typescript-loader'),
+      },
+      {
+        // Webpack loader to generate docgen information from Typescript React components.
+        loader: require.resolve('react-docgen-typescript-loader'),
+      },
+    ],
+  });
+
+  config.resolve.extensions.push('.ts', '.tsx');
+  config.resolve.extensions.push('.png', '.svg', '.jpg', '.gif');
 
 
-    config.resolve.modules.push(path.resolve(__dirname, "../src"))
+  config.resolve.modules.push(path.resolve(__dirname, "../src"))
 
-    // Return the altered config
-    return config;
+  // Return the altered config
+  return config;
 };
