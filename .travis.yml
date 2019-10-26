@@ -1,0 +1,8 @@
+language: javascript
+cache: npm
+install:
+  - npm install -g yarn
+  - yarn install
+
+script:
+  - yarn lint

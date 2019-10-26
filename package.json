@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "lint": "yarn standardx **/*.ts",
+    "lint-fix": "yarn standardx --fix **/*.ts"
   },
   "dependencies": {
     "leaflet": "^1.5.1",
