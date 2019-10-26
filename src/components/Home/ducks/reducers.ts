@@ -1,6 +1,6 @@
 
-import { combineReducers } from "redux";
-import * as types from "./types";
+import { combineReducers } from 'redux'
+// import * as types from './types'
 
 // /* State Shape
 // {
@@ -25,7 +25,7 @@ import * as types from "./types";
 //     }
 // }
 
-const reducer = combineReducers( {
-} );
+const reducer = combineReducers({
+})
 
-export default reducer;
+export default reducer

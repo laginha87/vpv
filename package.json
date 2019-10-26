@@ -27,8 +27,23 @@
     "@types/react-redux": "^7.1.4",
     "@types/react-router": "^5.1.1",
     "@types/react-router-dom": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
     "hygen": "^4.0.9",
-    "tslint": "^5.20.0",
+    "install": "^0.13.0",
+    "standardx": "^5.0.0",
     "typescript": "^3.6.3"
+  },
+  "eslintConfig": {
+    "rules": {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "error"
+    }
+  },
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
   }
 }

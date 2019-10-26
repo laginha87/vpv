@@ -1,6 +1,6 @@
-import { configureStore } from './configureStore';
-import { initialState } from './initialState';
+import { configureStore } from './configureStore'
+import { initialState } from './initialState'
 
-const store = configureStore(initialState);
+const store = configureStore(initialState)
 
-export { store };
+export { store }

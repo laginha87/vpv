@@ -1,16 +1,16 @@
 
-import * as types from "./types";
+// import * as types from './types'
 
 //  const quack = ( ) => ( {
-    //  type: types.QUACK
+//  type: types.QUACK
 //  } );
 
 //  const swim = ( distance ) => ( {
-    //  type: types.SWIM,
-    //  payload: {
-        //  distance
-    //  }
+//  type: types.SWIM,
+//  payload: {
+//  distance
+//  }
 //  } );
 
 export {
-};
+}
