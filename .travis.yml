@@ -1,5 +1,8 @@
-language: javascript
-cache: npm
+language: node_js
+node_js:
+  - '11'
+
+cache: yarn
 install:
   - npm install -g yarn
   - yarn install
