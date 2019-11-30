@@ -19,6 +19,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "src": "^1.1.2",
+    "swr": "^0.1.12",
     "tailwindcss": "^1.1.2"
   },
   "devDependencies": {
