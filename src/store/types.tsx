@@ -1,4 +1,4 @@
-import { APIState } from '~src/model/api'
+import { APIState } from '~src/model/model'
 
 export interface AppState {
     api: APIState;
