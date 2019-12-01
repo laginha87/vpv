@@ -6,6 +6,7 @@ import { useEffect, useCallback } from 'react'
 import { JSONApiResourceListingResponse, JSONApiResourceResponse } from './json_api'
 import { Fire } from './fire'
 import { Reducer } from 'redux'
+import { Campaign } from './campaign'
 
 type RequestStatus = 'loading' | 'loaded' | 'errored';
 
@@ -109,7 +110,7 @@ interface LoadResourceAction extends BaseAPIAction {
 
 type APIAction = LoadResourcesAction | LoadResourceAction;
 
-export const reducer: Reducer<APIState, APIAction> = (state = { fires: { byId: {}, hasLoadedAll: false } }, action) => {
+export const reducer: Reducer<APIState, APIAction> = (state = { fires: { byId: {}, hasLoadedAll: false }, campaigns: { byId: {}, hasLoadedAll: false } }, action) => {
   let modelName
   switch (action.type) {
     case APIActions.loadResources:
@@ -152,5 +153,6 @@ const actions = {
 }
 
 export const API = {
-  fires: buildAPI<Fire>(Fire)
+  fires: buildAPI<Fire>(Fire),
+  campaigns: buildAPI<Campaign>(Campaign)
 }

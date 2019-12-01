@@ -1,12 +1,7 @@
 import React from 'react'
-import { MarkerI, MapComponent } from '../Map/MapComponent'
+import { MapComponent } from '../Map/MapComponent'
 import { Icon } from '../common/Icon'
-
-const markers: MarkerI[] = [
-  { position: [51.400, 0], type: 'campaign' },
-  { position: [51.200, 0], type: 'fire' },
-  { position: [38.7863488, -9.1588781], type: 'campaign' }
-]
+import { API } from '../../model/api'
 
 interface Campaign {
   id: number;
@@ -16,16 +11,6 @@ interface Campaign {
   percentageComplete: number;
   endDate: number;
 }
-const campaign = {
-  id: 1,
-  name: 'Corporação de Vilar',
-  numberOfVoluntaries: 5,
-  distance: 25,
-  percentageComplete: 65,
-  endDate: 20
-}
-
-const campaigns: Campaign[] = Array(10).fill(campaign)
 
 export const CampaignCard = ({ campaign: { numberOfVoluntaries, name, distance, endDate, percentageComplete } }: { campaign: Campaign }) => (
   <div className='rounded shadow p-5 mb-4 select-none'>
@@ -47,9 +32,10 @@ const ProgressBar = ({ percentage }) => (
   </div>)
 
 export const HomeComponent = () => {
+  const { data: campaigns } = API.campaigns.useGetAll()
   return (
     <div>
-      <MapComponent markers={markers as any} />
+      <MapComponent />
       <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100' style={{ top: '40vh', maxHeight: '60vh', overflow: 'scroll' }}>
         <div className='text-center text-grey-900 font-bold text-xl mb-4'>Campanhas ativas na tua área</div>
         {campaigns && campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)}
