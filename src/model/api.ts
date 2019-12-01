@@ -45,7 +45,7 @@ export function buildAPI<T extends Model> (ModelKlass: ModelClass): {
         all: selectors.selectAll(getAPIState(state))
       }))
 
-      const { data, error } = useSWR(['http://localhost:3000', ModelKlass.modelName].join('/'), fetch)
+      const { data, error } = useSWR([process.env.API_HOST, ModelKlass.modelName].join('/'), fetch)
 
       useEffect(() => {
         if (data) {
@@ -69,7 +69,7 @@ export function buildAPI<T extends Model> (ModelKlass: ModelClass): {
 
       const instance = useSelector<AppState, any>(get)
 
-      const { data, error } = useSWR(['http://localhost:3000', ModelKlass.modelName, id].join('/'), fetch)
+      const { data, error } = useSWR([process.env.API_HOST, ModelKlass.modelName, id].join('/'), fetch)
 
       useEffect(() => {
         if (data) {
