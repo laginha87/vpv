@@ -34,7 +34,7 @@ function buildSelectors (modelClass: ModelClass) {
 
 export function buildAPI<T extends Model> (ModelKlass: ModelClass): {
   useGetAll: () => { data: T[], status: RequestStatus },
-  useGet: (id: string) => { data: T | undefined, status: RequestStatus }
+  useGet: (id: string) => { data: T | null, status: RequestStatus }
 } {
   const selectors = buildSelectors(ModelKlass)
   return {
@@ -81,7 +81,7 @@ export function buildAPI<T extends Model> (ModelKlass: ModelClass): {
       }, [data, error])
 
       if (instance) {
-        return instance
+        return { data: instance, status: 'loaded' }
       }
 
       return { data: null, status: error ? 'errored' : 'loading' }
@@ -129,7 +129,7 @@ export const reducer: Reducer<APIState, APIAction> = (state = { fires: { byId: {
         ...state,
         [modelName]: {
           ...state[modelName],
-          [action.data.id]: action.data
+          byId: { ...state[modelName].byId, [action.data.id]: action.data }
         }
       }
 

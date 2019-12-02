@@ -8,8 +8,11 @@
     "lint": "standardx '**/*.ts' '**/*.tsx'"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "leaflet": "^1.5.1",
+    "luxon": "^1.21.3",
     "parcel": "^1.12.3",
+    "query-string": "^6.9.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-leaflet": "^2.4.0",
@@ -18,12 +21,12 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "src": "^1.1.2",
     "swr": "^0.1.12",
     "tailwindcss": "^1.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
+    "@types/luxon": "^1.21.0",
     "@types/node": "^12.7.8",
     "@types/react-dom": "^16.9.1",
     "@types/react-leaflet": "^2.4.0",
@@ -39,7 +42,6 @@
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "postcss-import": "^12.0.1",
-    "react-docgen-typescript-loader": "^3.3.0",
     "standardx": "^5.0.0",
     "tslint": "^5.20.0",
     "typescript": "^3.6.3"
