@@ -1,7 +1,9 @@
-import { Model } from './model'
 
-export class Fire extends Model {
-    static modelName = 'fires';
-    latitude!: number;
-    longitude!: number;
+import { ModelDefinition } from '@orbit/data'
+
+export const FIRE_SCHEMA: ModelDefinition = {
+  attributes: {
+    latitude: { type: 'string' },
+    longitude: { type: 'string' }
+  }
 }

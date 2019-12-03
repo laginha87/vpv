@@ -1,7 +1,5 @@
 import React from 'react'
 import { MapComponent } from '../Map/MapComponent'
-import { API } from '../../model/api'
-import { Campaign } from '../../model/campaign'
 import { DateTime } from 'luxon'
 import { Link } from 'react-router-dom'
 import { ProgressBar } from '../common/ProgressBar'
@@ -29,13 +27,13 @@ export const CampaignCard = ({ campaign: { name, endDatetime, completion, id } }
   </Link>)
 
 export const HomeComponent = () => {
-  const { data: campaigns } = API.campaigns.useGetAll()
+  const { data: campaigns } = { data: { campaigns: [] } }
   return (
     <div>
       <MapComponent center={[38.736946, -9.142685]} />
       <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100' style={{ top: '40vh', maxHeight: '60vh', overflow: 'scroll' }}>
         <div className='text-center text-grey-900 font-bold text-xl mb-4'>Campanhas ativas na tua área</div>
-        {campaigns && campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)}
+        {/* {campaigns && campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)} */}
       </div>
     </div>)
 }

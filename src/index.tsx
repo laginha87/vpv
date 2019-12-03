@@ -4,11 +4,14 @@ import { Provider } from 'react-redux'
 
 import { App } from './components/App'
 import { store } from './store'
+import { DataProvider } from './components/common/DataProvider'
 // import './tailwind.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <DataProvider>
+      <App />
+    </DataProvider>
   </Provider>,
   document.getElementById('root')
 )
