@@ -3,6 +3,7 @@ import { MapComponent } from '../Map/MapComponent'
 import { useLocation } from 'react-router'
 import { VoluntaryLabel } from '../common/VoluntaryLabel'
 import { ProgressBar } from '../common/ProgressBar'
+import { useGetCampaign } from '../../model/campaign'
 
 export interface CampaignShowComponentProps {
 
@@ -13,7 +14,7 @@ const useId = (): string => {
   return pathname.split('/').pop() as string
 }
 
-const CampaignStatus = ({ campaign: { name, campaignSupplies } }: { campaign: Campaign }) => {
+const CampaignStatus = ({ campaign: { name, campaignSupplies } }: { campaign: any }) => {
   return (
     <div>
       <div className='text-center text-grey-900 font-bold text-xl mb-4'>Paulo, a {name} <br /> precisa de:</div>
@@ -33,19 +34,18 @@ const CampaignStatus = ({ campaign: { name, campaignSupplies } }: { campaign: Ca
 const CampaignShowComponent: React.FC<CampaignShowComponentProps> = () => {
   const id = useId()
 
-  // const { data: campaign } = API.campaigns.useGet(id)
-  // if (!campaign) {
-  //   return <div />
-  // }
+  const { campaign } = useGetCampaign(id)
+  if (!campaign) {
+    return <div />
+  }
 
-  // return (
-  //   <div>
-  //     <MapComponent center={[campaign!.latitude, campaign!.longitude]} />
-  //     <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100 h-full' style={{ top: '20vh', maxHeight: '80vh', overflow: 'scroll' }}>
-  //       <CampaignStatus campaign={campaign} />
-  //     </div>
-  //   </div>)
-  return <div />
+  return (
+    <div>
+      <MapComponent center={[campaign!.latitude, campaign!.longitude]} />
+      <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100 h-full' style={{ top: '20vh', maxHeight: '80vh', overflow: 'scroll' }}>
+        <CampaignStatus campaign={campaign} />
+      </div>
+    </div>)
 }
 
 export default CampaignShowComponent

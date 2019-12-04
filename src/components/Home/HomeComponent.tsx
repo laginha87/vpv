@@ -4,6 +4,7 @@ import { DateTime } from 'luxon'
 import { Link } from 'react-router-dom'
 import { ProgressBar } from '../common/ProgressBar'
 import { VoluntaryLabel } from '../common/VoluntaryLabel'
+import { useGetAllCampaigns } from '../../model/campaign'
 
 const humanize = (e: DateTime) => {
   if (e.diffNow().hours > 24) {
@@ -13,7 +14,7 @@ const humanize = (e: DateTime) => {
   }
 }
 
-export const CampaignCard = ({ campaign: { name, endDatetime, completion, id } }: { campaign: Campaign }) => (
+export const CampaignCard = ({ campaign: { attributes: { endDatetime, completion }, id, corporation: { attributes: { name } } } }) => (
   <Link className='rounded shadow p-5 mb-4 select-none' to={`/campaigns/${id}`}>
     <div className='text-grey-900 font-bold text-xl mb-2'>{name}</div>
     <VoluntaryLabel number={100} />
@@ -27,13 +28,14 @@ export const CampaignCard = ({ campaign: { name, endDatetime, completion, id } }
   </Link>)
 
 export const HomeComponent = () => {
-  const { data: campaigns } = { data: { campaigns: [] } }
+  const campaigns = useGetAllCampaigns()
+
   return (
     <div>
       <MapComponent center={[38.736946, -9.142685]} />
       <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100' style={{ top: '40vh', maxHeight: '60vh', overflow: 'scroll' }}>
         <div className='text-center text-grey-900 font-bold text-xl mb-4'>Campanhas ativas na tua área</div>
-        {/* {campaigns && campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)} */}
+        {campaigns && campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)}
       </div>
     </div>)
 }

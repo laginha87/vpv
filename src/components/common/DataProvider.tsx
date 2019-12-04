@@ -1,31 +1,30 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import { QueryOrExpression } from '@orbit/data'
+import { createContext, useContext, useEffect, useState } from 'react'
 
-import { DataStore, setup } from '../../model/setup'
+import { DataStore } from '../../model/setup'
 
 const a = createContext<{ store: DataStore } | null>(null)
 
-export const useDataStory = (cb: (s: DataStore) => Promise<any>, options: object = {}) => {
-  const [res, setRes] = useState(null)
+export function useMemorySource () {
+  const { store } = useContext(a)!
+  return store.memory
+}
+
+export function useQuery<T> (cb: QueryOrExpression, options: object = {}): T {
+  const [res, setRes] = useState<any>(null)
   const { store } = useContext(a)!
 
   useEffect(() => {
-    if (!store) { return };
-    cb(store).then(setRes)
-    // store.remote.query(query, options).then((e) => {
-    //     setRes(e)
-    // });
+    const sync = () => setRes(store.memory.cache.query(cb))
+    store.memory.on('sync', sync)
+    store
+      .memory
+      .query(cb, options)
+      .then(setRes)
+    return () => store.memory.off('sync', sync)
   }, [store])
 
   return res
 }
 
-export const DataProvider: React.FC = (props) => {
-  const [store, setStore] = useState()
-  useEffect(() => {
-    setup().then(setStore)
-  }, [])
-
-  return <a.Provider value={{ store }}>
-    {props.children}
-         </a.Provider>
-}
+export const DataProvider = a.Provider

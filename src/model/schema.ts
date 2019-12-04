@@ -1,21 +1,24 @@
 import { Schema } from '@orbit/data'
-import { FIRE_SCHEMA } from './fire'
+
 import { CAMPAIGN_SCHEMA } from './campaign'
 import { CAMPAIGN_SUPPLY_SCHEMA } from './campaign_supply'
 import { CORPORATION_SCHEMA } from './corporation'
+import { FIRE_SCHEMA } from './fire'
 import { SUPPLY_SCHEMA } from './supply'
 
 const pluralizations = {
   campaign: 'campaigns',
   campaignSupply: 'campaignSupplies',
   corporation: 'corporations',
-  supply: 'supplies'
+  supply: 'supplies',
+  fire: 'fires'
 }
 const singularizations = {
   campaigns: 'campaign',
   campaignSupplies: 'campaignSupply',
   corporations: 'corporation',
-  supplies: 'supply'
+  supplies: 'supply',
+  fires: 'fire'
 }
 
 const schema = {
