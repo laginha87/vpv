@@ -15,11 +15,19 @@ export function useQuery<T> (cb: QueryOrExpression, options: object = {}): T {
   const { store } = useContext(a)!
 
   useEffect(() => {
-    const sync = () => setRes(store.memory.cache.query(cb))
+    const sync = () => {
+      try {
+        setRes(store.memory.cache.query(cb))
+      } catch (e) {
+
+      }
+    }
     store.memory.on('sync', sync)
+
     store
       .memory
       .query(cb, options)
+      .catch((e) => store.memory.requestQueue.skip(e))
       .then(setRes)
     return () => store.memory.off('sync', sync)
   }, [store])

@@ -1,4 +1,5 @@
 import { ModelDefinition } from '@orbit/data'
+import { useQuery } from '../components/common/DataProvider'
 
 export const SUPPLY_SCHEMA: ModelDefinition = {
   attributes: {
@@ -9,4 +10,8 @@ export const SUPPLY_SCHEMA: ModelDefinition = {
   relationships: {
     campaignSupplies: { type: 'hasMany', model: 'campaignSupply', inverse: 'supply' }
   }
+}
+
+export const useGetAllSupplies = () => {
+  return useQuery((q) => q.findRecords('supply')) || []
 }

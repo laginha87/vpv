@@ -6,7 +6,7 @@ export const CAMPAIGN_SUPPLY_SCHEMA : ModelDefinition = {
     quantitySupplied: { type: 'number' }
   },
   relationships: {
-    campaign: { type: 'hasMany', model: 'campaign', inverse: 'campaignSupplies' },
-    supply: { type: 'hasMany', model: 'supply', inverse: 'campaignSupplies' }
+    campaign: { type: 'hasOne', model: 'campaign', inverse: 'campaignSupplies' },
+    supply: { type: 'hasOne', model: 'supply', inverse: 'campaignSupplies' }
   }
 }

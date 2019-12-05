@@ -13,7 +13,7 @@ const DISABLED_THEME_STYLES : {[k in ButtonTheme]: string } = {
 interface ButtonProps {
     theme: ButtonTheme,
     children: any,
-    disabled: boolean,
+    disabled?: boolean,
 }
 const BASE_STYLE = 'text-center px-18 py-3 rounded-lg'
 export const Button = (props : ButtonProps) =>

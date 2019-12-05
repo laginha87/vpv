@@ -1,5 +1,6 @@
 import { ModelDefinition } from '@orbit/data'
 import { useQuery, useMemorySource } from '../components/common/DataProvider'
+import { useGetAllSupplies } from './supply'
 
 export const CAMPAIGN_SCHEMA: ModelDefinition = {
   attributes: {
@@ -25,12 +26,18 @@ export const useGetAllCampaigns = () => {
 
 export const useGetCampaign = (id: string) => {
   const campaign: any = useQuery((q) => q.findRecord({ type: 'campaign', id }), { sources: { remote: { include: ['campaignSupplies', 'corporation'] } } })
-
+  const supplies = useGetAllSupplies() as any[]
   const memory = useMemorySource()
 
   if (campaign) {
     campaign.corporation = memory.cache.query((q) => q.findRecord({ type: 'corporation', id: campaign.relationships.corporation.data.id }))
     campaign.campaignSupplies = memory.cache.query((q) => q.findRelatedRecords({ type: 'campaign', id: campaign.id }, 'campaignSupplies'))
+  }
+
+  if (supplies && campaign) {
+    campaign.campaignSupplies.forEach(e => {
+      e.supply = supplies.find((ee) => ee.id === e.relationships.supply.data.id)
+    })
   }
 
   return campaign

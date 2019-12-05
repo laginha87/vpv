@@ -4,6 +4,9 @@ import { useLocation } from 'react-router'
 import { VoluntaryLabel } from '../common/VoluntaryLabel'
 import { ProgressBar } from '../common/ProgressBar'
 import { useGetCampaign } from '../../model/campaign'
+import { Button } from '../common/Button'
+import { Icon } from '../common/Icon'
+import { Card } from '../common/Card'
 
 export interface CampaignShowComponentProps {
 
@@ -14,18 +17,18 @@ const useId = (): string => {
   return pathname.split('/').pop() as string
 }
 
-const CampaignStatus = ({ campaign: { name, campaignSupplies } }: { campaign: any }) => {
+const CampaignStatus = ({ corporation: { attributes: { name } }, campaignSupplies }: any) => {
   return (
     <div>
       <div className='text-center text-grey-900 font-bold text-xl mb-4'>Paulo, a {name} <br /> precisa de:</div>
 
       <VoluntaryLabel number={87} />
-      {campaignSupplies.map((e, i) => (
+      {campaignSupplies.map(({ attributes: { quantityNeeded, quantitySupplied }, supply }, i) => (
         <div className='py-4 border-b border-grey-200' key={i}>
-          <ProgressBar key={i} percentage={(e.quantitySupplied / e.quantityNeeded) * 100} />
+          <ProgressBar key={i} percentage={(quantitySupplied / quantityNeeded) * 100} />
           <div className='flex'>
-            <div className='w-1/2 font-bold'>{e.supplyName}</div>
-            <div className='w-1/2 text-right'> Faltam {e.quantitySupplied} de {e.quantityNeeded}</div>
+            <div className='w-1/2 font-semibold'>{supply && supply.attributes && supply.attributes.name}</div>
+            <div className='w-1/2 text-right font-book text-grey-800'> Faltam {quantitySupplied} de {quantityNeeded}</div>
           </div>
         </div>))}
     </div>)
@@ -34,16 +37,29 @@ const CampaignStatus = ({ campaign: { name, campaignSupplies } }: { campaign: an
 const CampaignShowComponent: React.FC<CampaignShowComponentProps> = () => {
   const id = useId()
 
-  const { campaign } = useGetCampaign(id)
+  const campaign = useGetCampaign(id)
   if (!campaign) {
     return <div />
   }
 
+  const { corporation, campaignSupplies } = campaign
+
   return (
     <div>
-      <MapComponent center={[campaign!.latitude, campaign!.longitude]} />
+      <MapComponent center={[corporation.attributes.latitude, corporation.attributes.longitude]} />
       <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100 h-full' style={{ top: '20vh', maxHeight: '80vh', overflow: 'scroll' }}>
-        <CampaignStatus campaign={campaign} />
+        <CampaignStatus corporation={corporation} campaignSupplies={campaignSupplies} />
+        <div className='absolute bottom-0 w-full -mx-6 px-6 pb-6'>
+          <Card>
+            <div className='flex justify-between mb-4 font-semibold'>
+              <div>
+              Até ás 20h00
+              </div>
+              <a className='text-grey-800'>Partilhar esta campanha</a>
+            </div>
+            <Button theme='primary'>Escolher Donativos <Icon icon='cenas' /></Button>
+          </Card>
+        </div>
       </div>
     </div>)
 }
