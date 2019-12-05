@@ -7,6 +7,7 @@ import { useGetCampaign } from '../../model/campaign'
 import { Button } from '../common/Button'
 import { Icon } from '../common/Icon'
 import { Card } from '../common/Card'
+import { Link } from 'react-router-dom'
 
 export interface CampaignShowComponentProps {
 
@@ -49,7 +50,7 @@ const CampaignShowComponent: React.FC<CampaignShowComponentProps> = () => {
       <MapComponent center={[corporation.attributes.latitude, corporation.attributes.longitude]} />
       <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100 h-full' style={{ top: '20vh', maxHeight: '80vh', overflow: 'scroll' }}>
         <CampaignStatus corporation={corporation} campaignSupplies={campaignSupplies} />
-        <div className='absolute bottom-0 w-full -mx-6 px-6 pb-6'>
+        <div className='absolute bottom-0 w-full -mx-6'>
           <Card>
             <div className='flex justify-between mb-4 font-semibold'>
               <div className='flex items-center'>
@@ -59,7 +60,7 @@ const CampaignShowComponent: React.FC<CampaignShowComponentProps> = () => {
               </div>
               <a className='text-grey-800'>Partilhar esta campanha</a>
             </div>
-            <Button theme='primary'>Escolher Donativos <Icon icon='cenas' /></Button>
+            <Button theme='primary'><Link to={`/campaigns/${id}/supply`}>Escolher Donativos <Icon icon='cenas' /></Link></Button>
           </Card>
         </div>
       </div>
