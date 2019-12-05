@@ -2,7 +2,7 @@ import React from 'react'
 import { MapComponent } from '../Map/MapComponent'
 import { useLocation } from 'react-router'
 import { VoluntaryLabel } from '../common/VoluntaryLabel'
-import { ProgressBar } from '../common/ProgressBar'
+import Progress from '../common/Progress'
 import { useGetCampaign } from '../../model/campaign'
 import { Button } from '../common/Button'
 import { Icon } from '../common/Icon'
@@ -25,7 +25,7 @@ const CampaignStatus = ({ corporation: { attributes: { name } }, campaignSupplie
       <VoluntaryLabel number={87} />
       {campaignSupplies.map(({ attributes: { quantityNeeded, quantitySupplied }, supply }, i) => (
         <div className='py-4 border-b border-grey-200' key={i}>
-          <ProgressBar key={i} percentage={(quantitySupplied / quantityNeeded) * 100} />
+          <Progress.Bar key={i} percentage={(quantitySupplied / quantityNeeded) * 100} />
           <div className='flex'>
             <div className='w-1/2 font-semibold'>{supply && supply.attributes && supply.attributes.name}</div>
             <div className='w-1/2 text-right font-book text-grey-800'> Faltam {quantitySupplied} de {quantityNeeded}</div>
@@ -52,8 +52,10 @@ const CampaignShowComponent: React.FC<CampaignShowComponentProps> = () => {
         <div className='absolute bottom-0 w-full -mx-6 px-6 pb-6'>
           <Card>
             <div className='flex justify-between mb-4 font-semibold'>
-              <div>
-              Até ás 20h00
+              <div className='flex items-center'>
+                <Progress.Radial percentage={0.5} />
+
+                <div className='ml-1'>Até ás 20h00</div>
               </div>
               <a className='text-grey-800'>Partilhar esta campanha</a>
             </div>

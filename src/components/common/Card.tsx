@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
 export const Card: FC = (props) => (
-  <div className='shadow-lg'>
+  <div className='bg-white shadow-lg p-6'>
     {props.children}
   </div>)

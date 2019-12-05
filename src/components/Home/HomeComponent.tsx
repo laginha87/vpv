@@ -2,7 +2,7 @@ import React from 'react'
 import { MapComponent } from '../Map/MapComponent'
 import { DateTime } from 'luxon'
 import { Link } from 'react-router-dom'
-import { ProgressBar } from '../common/ProgressBar'
+import Progress from '../common/Progress'
 import { VoluntaryLabel } from '../common/VoluntaryLabel'
 import { useGetAllCampaigns } from '../../model/campaign'
 
@@ -19,7 +19,7 @@ export const CampaignCard = ({ campaign: { attributes: { endDatetime, completion
     <div className='text-grey-900 font-bold text-xl mb-2'>{name}</div>
     <VoluntaryLabel number={100} />
     <div className='text-grey-500 mb-2 text-xs font-medium'>Estás a X minutos de carro</div>
-    <ProgressBar percentage={completion} />
+    <Progress.Bar percentage={completion} />
     <div className='flex justify-between mt-2'>
       <div className='font-bold text-grey-800'>{completion}% da Campanha Suprida</div>
       <div className='text-xs text-grey-500 font-medium'>{humanize(endDatetime)}</div>
