@@ -3,11 +3,9 @@ import Progress from '../common/Progress'
 import { Button } from '../common/Button'
 import { Icon } from '../common/Icon'
 import { Card } from '../common/Card'
-import classNames from 'classnames'
 import { List } from '../common/List'
 
 const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantitySupplied }, supply } }) => {
-  const name = supply && supply.attributes && supply.attributes.name
   const quantityLimit = quantityNeeded - quantitySupplied
 
   const [active, setActive] = useState(false)
@@ -18,11 +16,21 @@ const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantityS
     [setActive, active]
   )
 
+  let name, icon
+
+  if (supply && supply.attributes) {
+    ({ name, icon } = supply.attributes)
+  }
+
   return (
     <div>
       <div className='flex items-center'>
-        <div onClick={toggleActive} className={classNames('border-2 rounded-full w-5 h-5 mr-4 cursor-pointer', { 'bg-black': active })} />
-        <div className='w-5 h-5 bg-black rounded mr-2' />
+        <div onClick={toggleActive} className='w-5 h-5 mr-4 cursor-pointer'>
+          <Icon icon={active ? 'active' : 'inactive'} />
+        </div>
+        <div className='mr-2'>
+          <Icon icon={icon} size={10} background='grey-300' rounded />
+        </div>
         <div>
           <div className='font-semibold text-grey-900'>{name}</div>
           <div className='font-medium text-xs text-grey-800'>Até {quantityLimit} {name}</div>
@@ -33,9 +41,21 @@ const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantityS
         <div className='flex mt-4'>
           <div className='w-5 mr-4' />
           <div className='flex w-full'>
-            <div className='w-1/3'><Button theme='primary'> - </Button> </div>
-            <div className='w-1/3 mx-2 rounded border-2'>2</div>
-            <div className='w-1/3'> <Button theme='primary'> + </Button> </div>
+            <div className='w-1/3'>
+              <Button theme='secondary'>
+                <div className='flex items-center justify-center'>
+                  <Icon icon='remove' />
+                </div>
+              </Button>
+            </div>
+            <div className='w-1/3 mx-2 rounded border-2 border-black flex items-center justify-center'>2</div>
+            <div className='w-1/3'>
+              <Button theme='secondary'>
+                <div className='flex items-center justify-center'>
+                  <Icon icon='add' />
+                </div>
+              </Button>
+            </div>
           </div>
         </div>}
     </div>)
