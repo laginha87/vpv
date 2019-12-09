@@ -60,7 +60,9 @@ const CampaignShowComponent: React.FC<CampaignShowComponentProps> = () => {
               </div>
               <a className='text-grey-800'>Partilhar esta campanha</a>
             </div>
-            <Button theme='primary'><Link to={`/campaigns/${id}/supply`}>Escolher Donativos <Icon icon='cenas' /></Link></Button>
+            <Button theme='primary'>
+              <Link to={`/campaigns/${id}/supply`} className='flex items-center justify-center'> Escolher Donativos <Icon icon='chevronRight' size={6} /></Link>
+            </Button>
           </Card>
         </div>
       </div>

@@ -11,7 +11,6 @@ export const Radial = ({ percentage }) => {
   const radius = 0.8
   const amplitude = percentage * 2 * Math.PI
 
-  console.log(amplitude)
   const endX = Math.cos(amplitude) * radius
   const endY = Math.sin(amplitude) * radius
   const largeArcFlag = percentage > 0.5 ? 1 : 0

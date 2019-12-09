@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 export const BUTTON_TYPES = ['primary', 'secondary'] as const
 type ButtonTheme = typeof BUTTON_TYPES[number];
 
@@ -16,7 +17,10 @@ interface ButtonProps {
   theme: ButtonTheme,
   children: any,
   disabled?: boolean,
+  onClick?: () => void,
+  type?: 'button' | 'submit'
 }
-const BASE_STYLE = 'text-center px-18 py-3 rounded-lg'
-export const Button = (props: ButtonProps) =>
-  <div className={[props.disabled ? DISABLED_THEME_STYLES[props.theme] : THEME_STYLES[props.theme], BASE_STYLE].join(' ')}>{props.children}</div>
+
+const BASE_STYLE = 'cursor-pointer text-center p-3 rounded-lg w-full'
+export const Button = ({ theme, children, disabled, ...rest }: ButtonProps) =>
+  <button {...rest} className={classNames(BASE_STYLE, [disabled ? DISABLED_THEME_STYLES[theme] : THEME_STYLES[theme]])}>{children}</button>

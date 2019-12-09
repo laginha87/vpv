@@ -4,8 +4,10 @@ import { Button } from '../common/Button'
 import { Icon } from '../common/Icon'
 import { Card } from '../common/Card'
 import { List } from '../common/List'
+import { QuantityInput } from '../common/QuantityInput'
+import { useFormikContext } from 'formik'
 
-const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantitySupplied }, supply } }) => {
+const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantitySupplied }, supply }, index }) => {
   const quantityLimit = quantityNeeded - quantitySupplied
 
   const [active, setActive] = useState(false)
@@ -37,38 +39,22 @@ const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantityS
         </div>
 
       </div>
-      {active &&
-        <div className='flex mt-4'>
-          <div className='w-5 mr-4' />
-          <div className='flex w-full'>
-            <div className='w-1/3'>
-              <Button theme='secondary'>
-                <div className='flex items-center justify-center'>
-                  <Icon icon='remove' />
-                </div>
-              </Button>
-            </div>
-            <div className='w-1/3 mx-2 rounded border-2 border-black flex items-center justify-center'>2</div>
-            <div className='w-1/3'>
-              <Button theme='secondary'>
-                <div className='flex items-center justify-center'>
-                  <Icon icon='add' />
-                </div>
-              </Button>
-            </div>
-          </div>
-        </div>}
+      {active && <QuantityInput name={`campaignSupplies[${index}]quantity`} max={quantityLimit} />}
     </div>)
 }
 export const CampaignSupplyFields: FC = ({ campaign }) => {
+  const { errors } = useFormikContext<{ campaignSupplies: any[] }>()
+  console.log(errors.campaignSupplies)
+
   return (
     <>
-      <div>
+      <div className='pb-32'>
         <div className='text-center mb-5 text-grey-900 font-bold'>Seleciona os donativos da tua contribuição</div>
         <div className='text-center mb-8 text-grey-800 text-sm'>Podes escolher todos ou parte dos produtos que ainda faltam.</div>
-        <List collection={campaign && campaign.campaignSupplies} render={(e) => (<SupplyInput campaignSupply={e as any} key={e.id} />)} />
+        {errors.campaignSupplies && typeof (errors.campaignSupplies) === 'string' && <div className='text-red-100'>{errors.campaignSupplies}</div>}
+        <List collection={campaign && campaign.campaignSupplies} render={(e, i) => (<SupplyInput campaignSupply={e as any} key={e.id} index={i} />)} />
       </div>
-      <div className='absolute bottom-0 w-full -mx-6'>
+      <div className='fixed bottom-0 w-full -mx-6'>
         <Card>
           <div className='flex justify-between mb-4 font-semibold'>
             <div className='flex items-center'>
@@ -78,7 +64,10 @@ export const CampaignSupplyFields: FC = ({ campaign }) => {
             </div>
             <a className='text-grey-800'>Partilhar esta campanha</a>
           </div>
-          <Button theme='primary'>Confirmar Quantidades <Icon icon='cenas' /></Button>
+
+          <Button theme='primary' type='submit'>
+            <div className='flex justify-center items-center'>Confirmar Quantidades <Icon size={6} icon='chevronRight' /></div>
+          </Button>
         </Card>
       </div>
     </>

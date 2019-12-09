@@ -1,7 +1,7 @@
 import inactive from './inactive.svg'
 import active from './active.svg'
 import add from './add.svg'
-import arrow from './arrow-left.svg'
+import arrowLeft from './arrow-left.svg'
 import bottle from './bottle.svg'
 import chocolate from './chocolate.svg'
 import close from './close.svg'
@@ -12,14 +12,16 @@ import house from './house.svg'
 import meal from './meal.svg'
 import people from './people.svg'
 import remove from './remove.svg'
+import chevronRight from './chevronRight.svg'
 
 export const Icons = {
   inactive,
   active,
   add,
-  arrow,
+  arrowLeft,
   bottle,
   chocolate,
+  chevronRight,
   close,
   deleteIcon,
   directions,
