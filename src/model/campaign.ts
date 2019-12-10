@@ -1,6 +1,10 @@
 import { ModelDefinition } from '@orbit/data'
 import { useQuery, useMemorySource } from '../components/common/DataProvider'
-import { useGetAllSupplies } from './supply'
+import { useGetAllSupplies, Supply } from './supply'
+import { DateTime } from 'luxon'
+import { JSONRecord } from './JSONRecord'
+import { CampaignSupply } from './campaign_supply'
+import { Corporation } from './corporation'
 
 export const CAMPAIGN_SCHEMA: ModelDefinition = {
   attributes: {
@@ -11,6 +15,11 @@ export const CAMPAIGN_SCHEMA: ModelDefinition = {
     corporation: { type: 'hasOne', model: 'corporation', inverse: 'campaigns' },
     campaignSupplies: { type: 'hasMany', model: 'campaignSupply', inverse: 'campaign' }
   }
+}
+
+export interface Campaign extends JSONRecord<{ endDateTime: DateTime, completion: number }, 'corporation' | 'campaignSupplies'> {
+  campaignSupplies: CampaignSupply[],
+  corporation: Corporation,
 }
 
 export const useGetAllCampaigns = () => {
@@ -24,7 +33,7 @@ export const useGetAllCampaigns = () => {
   })
 }
 
-export const useGetCampaign = (id: string) => {
+export const useGetCampaign = (id: string): { campaign: Campaign, supplies: Supply[] } => {
   const campaign: any = useQuery((q) => q.findRecord({ type: 'campaign', id }), { sources: { remote: { include: ['campaignSupplies', 'corporation'] } } })
   const supplies = useGetAllSupplies() as any[]
   const memory = useMemorySource()
@@ -40,5 +49,5 @@ export const useGetCampaign = (id: string) => {
     })
   }
 
-  return campaign
+  return { campaign, supplies }
 }

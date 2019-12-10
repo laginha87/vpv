@@ -6,8 +6,10 @@ import { Card } from '../common/Card'
 import { List } from '../common/List'
 import { QuantityInput } from '../common/QuantityInput'
 import { useFormikContext } from 'formik'
+import { CampaignSupply } from '~src/model/campaign_supply'
+import { Campaign } from '~src/model/campaign'
 
-const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantitySupplied }, supply }, index }) => {
+const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantitySupplied }, supply }, index }: { campaignSupply: CampaignSupply, index: number }) => {
   const quantityLimit = quantityNeeded - quantitySupplied
 
   const [active, setActive] = useState(false)
@@ -42,7 +44,7 @@ const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantityS
       {active && <QuantityInput name={`campaignSupplies[${index}]quantity`} max={quantityLimit} />}
     </div>)
 }
-export const CampaignSupplyFields: FC = ({ campaign }) => {
+export const CampaignSupplyFields: FC<{ campaign: Campaign }> = ({ campaign }) => {
   const { errors } = useFormikContext<{ campaignSupplies: any[] }>()
   console.log(errors.campaignSupplies)
 

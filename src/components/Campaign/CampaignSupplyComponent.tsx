@@ -30,14 +30,14 @@ const SCHEMA = yup.object().shape({
 const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
   const id = useId()
 
-  const campaign = useGetCampaign(id)
-  if (!campaign) {
+  const { campaign, supplies } = useGetCampaign(id)
+  if (!campaign || supplies.length === 0) {
     return <div />
   }
 
   const { corporation } = campaign
 
-  const initialValues = campaign.campaignSupplies.map(({ supplyId }) => ({ supplyId, quantity: 0 }))
+  const initialValues = campaign.campaignSupplies.map(({ supply: { id: supplyId } }) => ({ supplyId, quantity: 0 }))
 
   return (
     <div>
