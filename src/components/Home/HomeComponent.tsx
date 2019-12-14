@@ -18,7 +18,7 @@ const humanize = (d: Date) => {
 }
 
 export const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign: { endDatetime, completion, id, corporation: { name } } }) => (
-  <Link className='rounded shadow p-5 mb-4 select-none' to={`/campaigns/${id}`}>
+  <Link className='rounded block shadow p-5 mb-4 select-none' to={`/campaigns/${id}`}>
     <div className='text-grey-900 font-bold text-xl mb-2'>{name}</div>
     <VoluntaryLabel number={100} />
     <div className='text-grey-500 mb-2 text-xs font-medium'>Estás a X minutos de carro</div>
