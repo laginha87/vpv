@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { MapComponent } from '../Map/MapComponent'
 import { DateTime } from 'luxon'
 import { Link } from 'react-router-dom'
 import Progress from '../common/Progress'
 import { VoluntaryLabel } from '../common/VoluntaryLabel'
-import { useGetAllCampaigns } from '../../model/campaign'
+import { Campaign } from '../../model/Campaign'
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 
-const humanize = (e: DateTime) => {
+const humanize = (d: Date) => {
+  const e = DateTime.fromJSDate(d)
   if (e.diffNow().hours > 24) {
     return `Termina a ${e.toFormat('HH:MM dd-mm-YYYY')}`
   } else {
@@ -14,7 +17,7 @@ const humanize = (e: DateTime) => {
   }
 }
 
-export const CampaignCard = ({ campaign: { attributes: { endDatetime, completion }, id, corporation: { attributes: { name } } } }) => (
+export const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign: { endDatetime, completion, id, corporation: { name } } }) => (
   <Link className='rounded shadow p-5 mb-4 select-none' to={`/campaigns/${id}`}>
     <div className='text-grey-900 font-bold text-xl mb-2'>{name}</div>
     <VoluntaryLabel number={100} />
@@ -28,14 +31,24 @@ export const CampaignCard = ({ campaign: { attributes: { endDatetime, completion
   </Link>)
 
 export const HomeComponent = () => {
-  const campaigns = useGetAllCampaigns()
-
+  const { data, loading } = useQuery<{ campaigns: Campaign[] }>(gql`
+  query {
+    campaigns {
+      id
+      endDatetime
+      completion
+      corporation {
+        name
+      }
+    }
+  }
+  `)
   return (
     <div>
       <MapComponent center={[38.736946, -9.142685]} />
       <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100' style={{ top: '40vh', maxHeight: '60vh', overflow: 'scroll' }}>
         <div className='text-center text-grey-900 font-bold text-xl mb-4'>Campanhas ativas na tua área</div>
-        {campaigns && campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)}
+        {!loading && data!.campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)}
       </div>
     </div>)
 }

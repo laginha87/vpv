@@ -10,7 +10,7 @@ const THEME_STYLES: { [k in ButtonTheme]: string } = {
 
 const DISABLED_THEME_STYLES: { [k in ButtonTheme]: string } = {
   primary: 'bg-black text-white font-book text-xl opacity-25',
-  secondary: 'bg-grey-300'
+  secondary: 'bg-grey-100'
 }
 
 interface ButtonProps {
@@ -22,5 +22,5 @@ interface ButtonProps {
 }
 
 const BASE_STYLE = 'cursor-pointer text-center p-3 rounded-lg w-full'
-export const Button = ({ theme, children, disabled, ...rest }: ButtonProps) =>
-  <button {...rest} className={classNames(BASE_STYLE, [disabled ? DISABLED_THEME_STYLES[theme] : THEME_STYLES[theme]])}>{children}</button>
+export const Button = ({ theme, children, disabled, onClick, ...rest }: ButtonProps) =>
+  <button {...rest} onClick={disabled ? () => { } : onClick} className={classNames(BASE_STYLE, [disabled ? DISABLED_THEME_STYLES[theme] : THEME_STYLES[theme]])}>{children}</button>

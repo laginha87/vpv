@@ -1,12 +1,20 @@
-import React from 'react'
-import { MapComponent } from '../Map/MapComponent'
-import { useLocation } from 'react-router'
-import { useGetCampaign } from '../../model/campaign'
+import { useQuery } from '@apollo/react-hooks'
 import { Formik } from 'formik'
+import gql from 'graphql-tag'
+import React, { useCallback, useState, createContext } from 'react'
+import { useLocation } from 'react-router'
 import * as yup from 'yup'
+import { Campaign, findCampaignQuery } from '../../model/Campaign'
+import { CampaignSupplyStep1 } from './CampaignSupplyStep1'
+import { CampaignSupplyStep2 } from './CampaignSupplyStep2'
 
-import { CampaignSupplyFields } from './CampaignSupplyFields'
+interface IStepContext {
+  nextStep: () => void,
+  previousStep: () => void,
+  currentStep: number,
+}
 
+export const StepContext = createContext<IStepContext | null>(null)
 export interface CampaignSupplyComponent {
 
 }
@@ -27,26 +35,56 @@ const SCHEMA = yup.object().shape({
 }
 )
 
+export interface CampaignSupplyForm {
+  campaignSupplies: {
+    supplyId: number,
+    quantity: number
+  }[]
+}
+
 const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
   const id = useId()
 
-  const { campaign, supplies } = useGetCampaign(id)
-  if (!campaign || supplies.length === 0) {
+  const { loading, data } = useQuery<{ campaign: Campaign }>(
+    gql`
+      query{
+        ${findCampaignQuery(id)}
+      }
+    `
+  )
+
+  const [step, setStep] = useState(1)
+  const nextStep = useCallback(
+    () => {
+      setStep((curr) => curr + 1)
+    },
+    [setStep]
+  )
+
+  const previousStep = useCallback(
+    () => {
+      setStep((curr) => curr - 1)
+    },
+    [setStep]
+  )
+  if (loading) {
     return <div />
   }
 
+  const { campaign } = data!
   const { corporation } = campaign
 
   const initialValues = campaign.campaignSupplies.map(({ supply: { id: supplyId } }) => ({ supplyId, quantity: 0 }))
-
+  const context : IStepContext = { nextStep, previousStep, currentStep: step }
   return (
     <div>
-      <MapComponent center={[corporation.attributes.latitude, corporation.attributes.longitude]} />
-      <div className='p-6 rounded-t-lg w-full z-10 absolute bg-grey-100 h-full' style={{ top: '20vh', maxHeight: '80vh', overflow: 'scroll' }}>
-        <Formik initialValues={{ campaignSupplies: initialValues }} onSubmit={() => { }} validationSchema={SCHEMA}>
-          <CampaignSupplyFields campaign={campaign} />
-        </Formik>
-      </div>
+      <Formik initialValues={{ campaignSupplies: initialValues }} onSubmit={() => { }} validationSchema={SCHEMA}>
+        <StepContext.Provider value={context}>
+          {
+            step === 1 ? <CampaignSupplyStep1 campaign={campaign} corporation={corporation} /> : <CampaignSupplyStep2 campaign={campaign} corporation={corporation} />
+          }
+        </StepContext.Provider>
+      </Formik>
     </div>)
 }
 

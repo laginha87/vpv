@@ -3,12 +3,12 @@ import { Icons } from '../../assets/icons'
 import classNames from 'classnames'
 
 export const ICON_NAMES = ['inactive', 'active', 'add', 'arrowLeft', 'bottle', 'chocolate', 'close', 'deleteIcon', 'directions', 'hands', 'house', 'meal', 'people', 'remove', 'chevronRight'] as const
-type IconNames = typeof ICON_NAMES[number];
+export type IconName = typeof ICON_NAMES[number];
 
-const IconImages: { [k in IconNames]: string } = Icons
+const IconImages: { [k in IconName]: string } = Icons
 
 interface IconProps {
-  icon: IconNames,
+  icon: IconName,
   size?: 10 | 6 | 4
   background?: 'grey-300'
   rounded?: boolean

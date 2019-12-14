@@ -14,7 +14,7 @@ module.exports = {
       'grey-900': '#303336',
       'black': '#121212',
       'white': '#ffffff'
-      },
+    },
     zIndex: {
       '1': 100,
       '4': 400,
@@ -22,6 +22,7 @@ module.exports = {
     },
     boxShadow: {
       default: '0px 4px 4px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.04)',
+      lg: '0px -4px 8px rgba(0, 0, 0, 0.04)'
     }
   },
   variants: {},

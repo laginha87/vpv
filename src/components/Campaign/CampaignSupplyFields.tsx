@@ -1,15 +1,11 @@
-import React, { FC, useState, useCallback } from 'react'
-import Progress from '../common/Progress'
-import { Button } from '../common/Button'
-import { Icon } from '../common/Icon'
-import { Card } from '../common/Card'
-import { List } from '../common/List'
-import { QuantityInput } from '../common/QuantityInput'
 import { useFormikContext } from 'formik'
-import { CampaignSupply } from '~src/model/campaign_supply'
-import { Campaign } from '~src/model/campaign'
+import React, { FC, useCallback, useState, useContext } from 'react'
+import { Campaign } from '../../model/Campaign'
+import { CampaignSupply } from '../../model/CampaignSupply'
+import { Button, BottomCard, Icon, List, Progress, QuantityInput } from '../common'
+import { CampaignSupplyForm, StepContext } from './CampaignSupplyComponent'
 
-const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantitySupplied }, supply }, index }: { campaignSupply: CampaignSupply, index: number }) => {
+const SupplyInput = ({ campaignSupply: { quantityNeeded, quantitySupplied, supply }, index }: { campaignSupply: CampaignSupply, index: number }) => {
   const quantityLimit = quantityNeeded - quantitySupplied
 
   const [active, setActive] = useState(false)
@@ -20,11 +16,7 @@ const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantityS
     [setActive, active]
   )
 
-  let name, icon
-
-  if (supply && supply.attributes) {
-    ({ name, icon } = supply.attributes)
-  }
+  const { name, icon } = supply
 
   return (
     <div>
@@ -44,9 +36,10 @@ const SupplyInput = ({ campaignSupply: { attributes: { quantityNeeded, quantityS
       {active && <QuantityInput name={`campaignSupplies[${index}]quantity`} max={quantityLimit} />}
     </div>)
 }
+
 export const CampaignSupplyFields: FC<{ campaign: Campaign }> = ({ campaign }) => {
-  const { errors } = useFormikContext<{ campaignSupplies: any[] }>()
-  console.log(errors.campaignSupplies)
+  const { errors, isValid, dirty } = useFormikContext<CampaignSupplyForm>()
+  const { nextStep } = useContext(StepContext)!
 
   return (
     <>
@@ -56,22 +49,20 @@ export const CampaignSupplyFields: FC<{ campaign: Campaign }> = ({ campaign }) =
         {errors.campaignSupplies && typeof (errors.campaignSupplies) === 'string' && <div className='text-red-100'>{errors.campaignSupplies}</div>}
         <List collection={campaign && campaign.campaignSupplies} render={(e, i) => (<SupplyInput campaignSupply={e as any} key={e.id} index={i} />)} />
       </div>
-      <div className='fixed bottom-0 w-full -mx-6'>
-        <Card>
-          <div className='flex justify-between mb-4 font-semibold'>
-            <div className='flex items-center'>
-              <Progress.Radial percentage={0.5} />
+      <BottomCard>
+        <div className='flex justify-between mb-4 font-semibold'>
+          <div className='flex items-center'>
+            <Progress.Radial percentage={0.5} />
 
-              <div className='ml-1'>Até ás 20h00</div>
-            </div>
-            <a className='text-grey-800'>Partilhar esta campanha</a>
+            <div className='ml-1'>Até ás 20h00</div>
           </div>
+          <a className='text-grey-800'>Partilhar esta campanha</a>
+        </div>
 
-          <Button theme='primary' type='submit'>
-            <div className='flex justify-center items-center'>Confirmar Quantidades <Icon size={6} icon='chevronRight' /></div>
-          </Button>
-        </Card>
-      </div>
+        <Button theme='primary' onClick={nextStep} disabled={!isValid || !dirty}>
+          <div className='flex justify-center items-center'>Confirmar Quantidades <Icon size={6} icon='chevronRight' /></div>
+        </Button>
+      </BottomCard>
     </>
   )
 }
