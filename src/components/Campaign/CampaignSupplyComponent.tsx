@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import { Campaign, findCampaignQuery } from '../../model/Campaign'
 import { CampaignSupplyStep1 } from './CampaignSupplyStep1'
 import { CampaignSupplyStep2 } from './CampaignSupplyStep2'
+import { CampaignSupplyStep3 } from './CampaignSupplyStep3'
 
 interface IStepContext {
   nextStep: () => void,
@@ -81,7 +82,9 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
       <Formik initialValues={{ campaignSupplies: initialValues }} onSubmit={() => { }} validationSchema={SCHEMA}>
         <StepContext.Provider value={context}>
           {
-            step === 1 ? <CampaignSupplyStep1 campaign={campaign} corporation={corporation} /> : <CampaignSupplyStep2 campaign={campaign} corporation={corporation} />
+            step === 1 ? <CampaignSupplyStep1 campaign={campaign} corporation={corporation} />
+              : step === 2 ? <CampaignSupplyStep2 campaign={campaign} corporation={corporation} />
+                : <CampaignSupplyStep3 campaign={campaign} corporation={corporation} />
           }
         </StepContext.Provider>
       </Formik>
