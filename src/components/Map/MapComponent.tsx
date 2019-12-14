@@ -3,8 +3,8 @@ import { Map, TileLayer, Marker } from 'react-leaflet'
 import { IconMap } from '../../assets/markers'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import { Fire } from '~src/model/fire'
-import { Campaign } from '~src/model/Campaign'
+import { Fire } from '../../model/Fire'
+import { Campaign } from '../../model/Campaign'
 
 type Position = [number, number];
 
