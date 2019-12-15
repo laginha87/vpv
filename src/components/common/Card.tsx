@@ -12,7 +12,7 @@ export const RoundedCard: FC = ({ children }) => (
 )
 
 export const BottomCard: FC = ({ children }) => (
-  <div className='fixed bottom-0 w-full -mx-6'>
+  <div className='fixed w-screen bottom-0 -mx-6' style={{ transform: 'translate3d(0,0,0)' }}>
     <Card>
       {children}
     </Card>
