@@ -1,2 +1,6 @@
 @import './leaflet.css';
 @import './tailwind.css';
+
+body {
+    overflow: hidden;
+}

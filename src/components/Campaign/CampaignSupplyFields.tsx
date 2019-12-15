@@ -33,7 +33,10 @@ const SupplyInput = ({ campaignSupply: { quantityNeeded, quantitySupplied, suppl
         </div>
 
       </div>
-      {active && <QuantityInput name={`campaignSupplies[${index}]quantity`} max={quantityLimit} />}
+      {active &&
+        <div className='flex mt-4 select-none'>
+          <div className='w-5 mr-4' /> <QuantityInput name={`campaignSupplies[${index}]quantity`} max={quantityLimit} />
+        </div>}
     </div>)
 }
 
