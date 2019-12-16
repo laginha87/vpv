@@ -1,8 +1,9 @@
 
 import { SupplyBasic } from './Supply'
 import { CampaignBasic } from './Campaign'
+import { Model } from './Model'
 
-export interface CampaignSupplyBasic {
+export interface CampaignSupplyBasic extends Model {
   quantityNeeded: number;
   quantitySupplied: number;
 }

@@ -1,0 +1,5 @@
+schema: '../vpv_api/schema.graphql'
+includes: ['src/model/queries/*.graphql']
+extensions:
+  endpoints:
+    default: http://localhost:3000

@@ -22,10 +22,10 @@ export const findCampaignQuery = (id) => `
       longitude
     }
     campaignSupplies {
+      id
       quantityNeeded
       quantitySupplied
       supply {
-        id
         name
         icon
         description

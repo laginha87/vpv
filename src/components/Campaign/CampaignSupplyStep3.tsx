@@ -1,7 +1,6 @@
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { Campaign } from '../../model/Campaign'
-import { CampaignSupply } from '../../model/CampaignSupply'
 import { CorporationBasic } from '../../model/Corporation'
 import { BottomCard, Button, Icon, RoundedCard } from '../common'
 import { MapComponent } from '../Map/MapComponent'
@@ -12,13 +11,8 @@ interface Props {
   corporation: CorporationBasic,
 }
 
-interface SupplyConfirmProps {
-  campaignSupply: CampaignSupply;
-  index: number
-}
-
 export const CampaignSupplyStep3: React.FC<Props> = ({ campaign, corporation }) => {
-  const { isValid } = useFormikContext<CampaignSupplyForm>()
+  const { isValid, submitForm } = useFormikContext<CampaignSupplyForm>()
   const { name, latitude, longitude } = corporation
 
   return (
@@ -48,7 +42,7 @@ export const CampaignSupplyStep3: React.FC<Props> = ({ campaign, corporation }) 
 
         <BottomCard>
           <div className='flex flex-col'>
-            <Button theme='primary' disabled={!isValid}>Estou Pronto a entregar</Button>
+            <Button theme='primary' disabled={!isValid} onClick={submitForm}>Estou Pronto a entregar</Button>
             <div className='text-grey-500 text-center mt-4'>Não Consigo Fazer Esta Entrega</div>
           </div>
         </BottomCard>

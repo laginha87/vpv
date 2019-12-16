@@ -1,10 +1,13 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Formik } from 'formik'
 import gql from 'graphql-tag'
-import React, { useCallback, useState, createContext } from 'react'
+import React, { createContext, useCallback, useState } from 'react'
 import { useLocation } from 'react-router'
 import * as yup from 'yup'
 import { Campaign, findCampaignQuery } from '../../model/Campaign'
+import CreateCampaignContributionMutation from '../../model/queries/CreateCampaignContribution.graphql'
+import { FormikCallback } from '../../types/formik'
+import { CampaignSupplyFinish } from './CampaignSupplyFinish'
 import { CampaignSupplyStep1 } from './CampaignSupplyStep1'
 import { CampaignSupplyStep2 } from './CampaignSupplyStep2'
 import { CampaignSupplyStep3 } from './CampaignSupplyStep3'
@@ -28,7 +31,7 @@ const useId = (): string => {
 const SCHEMA = yup.object().shape({
   campaignSupplies: yup.array().of(
     yup.object().shape({
-      supplyId: yup.number().required(),
+      campaignSupplyId: yup.number().required(),
       quantity: yup.number().required().moreThan(0)
     }
     )
@@ -38,7 +41,7 @@ const SCHEMA = yup.object().shape({
 
 export interface CampaignSupplyForm {
   campaignSupplies: {
-    supplyId: number,
+    campaignSupplyId: number,
     quantity: number
   }[]
 }
@@ -68,6 +71,27 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
     },
     [setStep]
   )
+
+  const [createContribution] = useMutation(CreateCampaignContributionMutation)
+
+  const handleSubmit = useCallback<FormikCallback<CampaignSupplyForm>>(
+    async ({ campaignSupplies }, { setSubmitting }) => {
+      setSubmitting(true)
+      await createContribution({
+        variables: {
+          input: {
+            campaignId: id,
+            userId: 1,
+            contributionSupplies: campaignSupplies
+
+          }
+        }
+      })
+
+      setSubmitting(false)
+    },
+    []
+  )
   if (loading) {
     return <div />
   }
@@ -75,16 +99,17 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
   const { campaign } = data!
   const { corporation } = campaign
 
-  const initialValues = campaign.campaignSupplies.map(({ supply: { id: supplyId } }) => ({ supplyId, quantity: 0 }))
-  const context : IStepContext = { nextStep, previousStep, currentStep: step }
+  const initialValues = campaign.campaignSupplies.map(({ id: campaignSupplyId }) => ({ campaignSupplyId, quantity: 0 }))
+  const context: IStepContext = { nextStep, previousStep, currentStep: step }
   return (
     <div>
-      <Formik initialValues={{ campaignSupplies: initialValues }} onSubmit={() => { }} validationSchema={SCHEMA}>
+      <Formik initialValues={{ campaignSupplies: initialValues }} onSubmit={handleSubmit} validationSchema={SCHEMA}>
         <StepContext.Provider value={context}>
           {
             step === 1 ? <CampaignSupplyStep1 campaign={campaign} corporation={corporation} />
               : step === 2 ? <CampaignSupplyStep2 campaign={campaign} corporation={corporation} />
-                : <CampaignSupplyStep3 campaign={campaign} corporation={corporation} />
+                : step === 3 ? <CampaignSupplyStep3 campaign={campaign} corporation={corporation} />
+                  : <CampaignSupplyFinish campaign={campaign} corporation={corporation} />
           }
         </StepContext.Provider>
       </Formik>
