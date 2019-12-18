@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { MapComponent } from '../Map/MapComponent'
-import { useLocation } from 'react-router'
 import { VoluntaryLabel } from '../common/VoluntaryLabel'
 import Progress from '../common/Progress'
 import { Button } from '../common/Button'
@@ -12,14 +11,10 @@ import gql from 'graphql-tag'
 import { CorporationBasic } from '../../model/Corporation'
 import { CampaignSupply } from '../../model/CampaignSupply'
 import { Campaign, findCampaignQuery } from '../../model/Campaign'
+import { useId } from './useId'
 
 export interface CampaignShowComponentProps {
 
-}
-
-const useId = (): string => {
-  const { pathname } = useLocation()
-  return pathname.split('/').pop() as string
 }
 
 const CampaignStatus: FC<{ corporation: CorporationBasic, campaignSupplies: CampaignSupply[] }> = ({ corporation: { name }, campaignSupplies }: any) => {

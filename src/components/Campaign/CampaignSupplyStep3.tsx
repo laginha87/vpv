@@ -32,7 +32,7 @@ export const CampaignSupplyStep3: React.FC<Props> = ({ campaign, corporation }) 
             </div>
           </RoundedCard>
         </div>
-        <div className='text-black text-center'>
+        <div className='text-center'>
           Entrega o teu contributo á {name} até às {campaign.endDatetime}.
         </div>
 

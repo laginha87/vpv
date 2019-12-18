@@ -1,13 +1,12 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Formik } from 'formik'
 import gql from 'graphql-tag'
-import React, { createContext, useCallback, useState } from 'react'
+import React, { createContext, useCallback, useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
 import * as yup from 'yup'
 import { Campaign, findCampaignQuery } from '../../model/Campaign'
 import CreateCampaignContributionMutation from '../../model/queries/CreateCampaignContribution.graphql'
 import { FormikCallback } from '../../types/formik'
-import { CampaignSupplyFinish } from './CampaignSupplyFinish'
 import { CampaignSupplyStep1 } from './CampaignSupplyStep1'
 import { CampaignSupplyStep2 } from './CampaignSupplyStep2'
 import { CampaignSupplyStep3 } from './CampaignSupplyStep3'
@@ -72,7 +71,7 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
     [setStep]
   )
 
-  const [createContribution] = useMutation(CreateCampaignContributionMutation)
+  const [createContribution, { data: createCampaignContribution }] = useMutation(CreateCampaignContributionMutation)
 
   const handleSubmit = useCallback<FormikCallback<CampaignSupplyForm>>(
     async ({ campaignSupplies }, { setSubmitting }) => {
@@ -92,6 +91,13 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
     },
     []
   )
+
+  useEffect(() => {
+    if (createCampaignContribution) {
+      console.log(createCampaignContribution.createCampaignContribution.campaignContribution.id)
+    }
+  }, [createCampaignContribution])
+
   if (loading) {
     return <div />
   }
@@ -108,8 +114,7 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
           {
             step === 1 ? <CampaignSupplyStep1 campaign={campaign} corporation={corporation} />
               : step === 2 ? <CampaignSupplyStep2 campaign={campaign} corporation={corporation} />
-                : step === 3 ? <CampaignSupplyStep3 campaign={campaign} corporation={corporation} />
-                  : <CampaignSupplyFinish campaign={campaign} corporation={corporation} />
+                : <CampaignSupplyStep3 campaign={campaign} corporation={corporation} />
           }
         </StepContext.Provider>
       </Formik>

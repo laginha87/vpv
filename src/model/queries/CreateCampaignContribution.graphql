@@ -1,6 +1,6 @@
 mutation CreateCampaignContribution($input: CreateCampaignContributionInput!){
     createCampaignContribution(input: $input) {
-        campaign {
+        campaignContribution {
             id
         }
     }
