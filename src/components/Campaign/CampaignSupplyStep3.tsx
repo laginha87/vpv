@@ -28,7 +28,7 @@ export const CampaignSupplyStep3: React.FC<Props> = ({ campaign, corporation }) 
                 <div>Rua das Fontainhas</div>
                 <div className='text-grey-500'>{latitude} {longitude}</div>
               </div>
-              <Icon size={8} padding={2} rounded background='black' icon='directions' />
+              <Icon w={8} p={2} rounded='default' bg='black' icon='directions' />
             </div>
           </RoundedCard>
         </div>

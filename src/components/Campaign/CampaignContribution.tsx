@@ -50,13 +50,13 @@ export const CampaignContribution: React.FC<Props> = () => {
   return (
     <div className='px-6 bg-grey-100 h-screen'>
       <div className='flex py-12 justify-center'>
-        <Icon icon='hands' fill='yellow-200' padding={6} background='yellow-100' circle size={12} />
+        <Icon icon='hands' fill='yellow-200' p={6} bg='yellow-100' rounded='full' w={12} />
       </div>
       <div className='font-bold text-grey-900 mb-4 text-center'>Obrigado por ajudares os Bombeiros Voluntários de {name}!</div>
 
       {campaignContributionSupplies.map(({ id, quantity, campaignSupply: { supply: { icon, name } } }) => (
         <div key={id} className='flex border-b border-grey-200 items-center py-6 items-center'>
-          <Icon icon={icon} size={10} />
+          <Icon icon={icon} w={10} />
           <div className='flex-grow ml-4'>{name}</div>
           <div>{quantity}</div>
         </div>))}
@@ -66,11 +66,11 @@ export const CampaignContribution: React.FC<Props> = () => {
           Partilha com os teus amigos
         </div>
         <div className='flex justify-center'>
-          <Icon size={12} icon='people' />
+          <Icon w={12} icon='people' />
           <div className='mx-2'>
-            <Icon size={12} icon='people' />
+            <Icon w={12} icon='people' />
           </div>
-          <Icon size={12} icon='people' />
+          <Icon w={12} icon='people' />
         </div>
 
       </div>

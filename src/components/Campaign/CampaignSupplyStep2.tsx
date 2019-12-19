@@ -34,7 +34,7 @@ const SupplyConfirm: React.FC<SupplyConfirmProps> = ({ campaignSupply, index }) 
         <div className='flex justify-between items-center'>
           <div className='rounded py-2 text-center border-2 border-grey-300' style={{ width: 51, height: 40 }}>{values.campaignSupplies[index].quantity}</div>
           <div>{name}</div>
-          <Icon icon={icon} size={10} />
+          <Icon icon={icon} w={10} />
         </div>
         <div className='my-3 text-grey-800'>
           {description}

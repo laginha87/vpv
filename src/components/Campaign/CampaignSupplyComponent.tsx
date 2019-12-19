@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Formik } from 'formik'
 import gql from 'graphql-tag'
 import React, { createContext, useCallback, useState, useEffect } from 'react'
-import { useLocation } from 'react-router'
+import { useLocation, useHistory } from 'react-router'
 import * as yup from 'yup'
 import { Campaign, findCampaignQuery } from '../../model/Campaign'
 import CreateCampaignContributionMutation from '../../model/queries/CreateCampaignContribution.graphql'
@@ -82,7 +82,6 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
             campaignId: id,
             userId: 1,
             contributionSupplies: campaignSupplies
-
           }
         }
       })
@@ -91,10 +90,12 @@ const CampaignSupplyComponent: React.FC<CampaignSupplyComponent> = () => {
     },
     []
   )
+  const history = useHistory()
 
   useEffect(() => {
     if (createCampaignContribution) {
-      console.log(createCampaignContribution.createCampaignContribution.campaignContribution.id)
+      const { createCampaignContribution: { campaignContribution: { id } } } = createCampaignContribution
+      history.push(`/campaign_contribution/${id}`)
     }
   }, [createCampaignContribution])
 

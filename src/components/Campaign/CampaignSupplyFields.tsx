@@ -25,7 +25,7 @@ const SupplyInput = ({ campaignSupply: { quantityNeeded, quantitySupplied, suppl
           <Icon icon={active ? 'active' : 'inactive'} />
         </div>
         <div className='mr-2'>
-          <Icon icon={icon} size={10} background='grey-300' rounded />
+          <Icon icon={icon} w={10} bg='grey-300' rounded='default' />
         </div>
         <div>
           <div className='font-semibold text-grey-900'>{name}</div>
@@ -63,7 +63,7 @@ export const CampaignSupplyFields: FC<{ campaign: Campaign }> = ({ campaign }) =
         </div>
 
         <Button theme='primary' onClick={nextStep} disabled={!isValid || !dirty}>
-          <div className='flex justify-center items-center'>Confirmar Quantidades <Icon size={6} icon='chevronRight' /></div>
+          <div className='flex justify-center items-center'>Confirmar Quantidades <Icon w={6} icon='chevronRight' /></div>
         </Button>
       </BottomCard>
     </>

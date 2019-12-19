@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
         "baseUrl": ".",
         "paths": {
             "~*": [
@@ -18,14 +20,13 @@
         "noImplicitAny": false
     },
     "include": [
-        "tailwind.config.js",
+        "./tailwind.config.js",
         "./src/**/*"
     ],
     "exclude": [
         "node_modules/"
     ],
     "files": [
-        "tailwind.config.d.ts",
         "declaration.d.ts"
     ]
 }
