@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react'
 import { useFormikContext } from 'formik'
-import { Button } from './Button'
-import { Icon } from './Icon'
 import { get } from 'lodash-es'
+import React, { useCallback } from 'react'
+import { Button } from '~components/common/Button'
+import { Icon } from '~components/common/Icon'
 
 interface Props {
   name: string,

@@ -1,0 +1,10 @@
+query AllCampaigns {
+  campaigns {
+    id
+    endDatetime
+    completion
+    corporation {
+      name
+    }
+  }
+}

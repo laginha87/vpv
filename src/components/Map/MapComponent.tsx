@@ -1,10 +1,9 @@
-import React from 'react'
-import { Map, TileLayer, Marker } from 'react-leaflet'
-import { IconMap } from '../../assets/markers'
-import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import { Fire } from '../../model/Fire'
-import { Campaign } from '../../model/Campaign'
+import React from 'react'
+import { Map, Marker, TileLayer } from 'react-leaflet'
+import { IconMap } from '~assets/markers'
+import { FCWithFragment } from '~store/types'
+import { Map_campaigns, Map_fires } from './__generated__/Map'
 
 type Position = [number, number];
 
@@ -14,25 +13,12 @@ export interface MarkerI {
 }
 
 interface MapProps {
-  center: Position,
-  height?: number
+  center: [number, number],
+  data: { fires: Map_fires[], campaigns: Map_campaigns[] },
+  height?: number,
 }
 
-export const MapComponent = ({ center, height = 100 }: MapProps) => {
-  const { data, loading } = useQuery<{ fires: Fire[], campaigns: Campaign[] }>(gql`
-  query {
-    fires {
-      latitude
-      longitude
-    }
-    campaigns {
-      corporation {
-        latitude
-        longitude
-      }
-    }
-  }`)
-
+export const MapComponent: FCWithFragment<MapProps> = ({ center, height = 100, data }: MapProps) => {
   return (
     <div style={{ height: `${height}vh` }}>
       <Map center={center} zoom={7} zoomControl={false} bound={[[41.9947515, -6.0333746], [36.964373, -9.4045612]]}>
@@ -40,8 +26,24 @@ export const MapComponent = ({ center, height = 100 }: MapProps) => {
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           attribution=''
         />
-        {!loading && data!.fires.map(({ latitude, longitude }, i) => <Marker key={`fire-${i}`} position={[latitude, longitude]} icon={IconMap.fire} />)}
-        {!loading && data!.campaigns.map(({ corporation: { latitude, longitude } }, i) => <Marker key={`campaign-${i}`} position={[latitude, longitude]} icon={IconMap.campaign} />)}
+        {data.fires.map(({ latitude, longitude }, i) => <Marker key={`fire-${i}`} position={[latitude!, longitude!]} icon={IconMap.fire} />)}
+        {data.campaigns.map(({ corporation }, i) => {
+          const { latitude, longitude } = corporation!
+          return <Marker key={`campaign-${i}`} position={[latitude!, longitude!]} icon={IconMap.campaign} />
+        })}
       </Map>
     </div>)
 }
+
+MapComponent.fragments = gql`
+fragment MapFire on Fire {
+      latitude
+      longitude
+    }
+fragment MapCampaign on Campaign {
+      corporation {
+        latitude
+        longitude
+      }
+  }
+`

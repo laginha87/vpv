@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
-import * as Icons from '../Icons'
 import classNames from 'classnames'
-import { TailwindProps, TailwindColor, tailwindClassNames } from '../../styles'
+import React, { FC } from 'react'
+import * as Icons from '~components/Icons'
+import { tailwindClassNames, TailwindColor, TailwindProps } from '~styles'
 
 export const ICON_NAMES = ['inactive', 'active', 'add', 'arrowLeft', 'bottle', 'chocolate', 'close', 'deleteIcon', 'directions', 'hands', 'house', 'meal', 'people', 'remove', 'chevronRight'] as const
 export type IconName = typeof ICON_NAMES[number];

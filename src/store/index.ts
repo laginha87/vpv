@@ -1,5 +1,5 @@
-import { configureStore } from './configureStore'
-import { initialState } from './initialState'
+import { configureStore } from '~store/configureStore'
+import { initialState } from '~store/initialState'
 
 const store = configureStore(initialState)
 

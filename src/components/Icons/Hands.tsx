@@ -1,5 +1,5 @@
 import React from 'react'
-import { TailwindColor, COLORS } from '../../styles'
+import { COLORS, TailwindColor } from '~styles'
 
 const SvgHands = ({ fill, ...props }: { fill: TailwindColor }) => {
   return (

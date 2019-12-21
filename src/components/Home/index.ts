@@ -1,4 +1,4 @@
 
-import { HomeComponent } from './HomeComponent'
+import { HomeScreen } from '~components/Home/HomeScreen'
 
-export default HomeComponent
+export default HomeScreen

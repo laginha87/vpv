@@ -1,5 +1,5 @@
-import tailwindConfig from '../../tailwind.config'
 import classNames from 'classnames'
+import tailwindConfig from '~/../tailwind.config'
 export type TailwindColor = keyof typeof tailwindConfig.theme.colors;
 export type TailwindPadding = keyof typeof tailwindConfig.theme.padding;
 export type TailwindMargin = keyof typeof tailwindConfig.theme.margin;
@@ -14,24 +14,24 @@ export const BG_COLORS = COLOR_NAMES.map(e => `bg-${e}`)
 export const TEXT_COLORS = COLOR_NAMES.map(e => `text-${e}`)
 
 export interface TailwindPropsInner {
-    p: TailwindPadding,
-    px: TailwindPadding,
-    py: TailwindPadding,
-    pl: TailwindPadding,
-    pr: TailwindPadding,
-    pt: TailwindPadding,
-    pb: TailwindPadding,
-    m: TailwindMargin,
-    mx: TailwindMargin,
-    my: TailwindMargin,
-    ml: TailwindMargin,
-    mr: TailwindMargin,
-    mt: TailwindMargin,
-    mb: TailwindMargin,
-    bg: TailwindColor,
-    text: TailwindColor,
-    w: TailwindWidth,
-    rounded: TailwindBorderRadius,
+  p: TailwindPadding,
+  px: TailwindPadding,
+  py: TailwindPadding,
+  pl: TailwindPadding,
+  pr: TailwindPadding,
+  pt: TailwindPadding,
+  pb: TailwindPadding,
+  m: TailwindMargin,
+  mx: TailwindMargin,
+  my: TailwindMargin,
+  ml: TailwindMargin,
+  mr: TailwindMargin,
+  mt: TailwindMargin,
+  mb: TailwindMargin,
+  bg: TailwindColor,
+  text: TailwindColor,
+  w: TailwindWidth,
+  rounded: TailwindBorderRadius,
 }
 
 const TailwindPropKeys: { [k in keyof TailwindPropsInner]: string } = {
@@ -62,7 +62,6 @@ export const tailwindClassNames = (props: Partial<TailwindPropsInner>, ...rest) 
     .keys(props)
     .filter((e) => TailwindPropsSet.has(e))
     .map((k) => props[k] === 'default' ? k : [k, props[k]].join('-')).join(' ')
-  console.log(tailwindClasses)
   return classNames(tailwindClasses, rest)
 }
 
