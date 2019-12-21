@@ -3,7 +3,8 @@ import React from 'react'
 import { Map, Marker, TileLayer } from 'react-leaflet'
 import { IconMap } from '~assets/markers'
 import { FCWithFragment } from '~store/types'
-import { Map_campaigns, Map_fires } from './__generated__/Map'
+import { MapCampaign } from './__generated__/MapCampaign'
+import { MapFire } from './__generated__/MapFire'
 
 type Position = [number, number];
 
@@ -14,7 +15,7 @@ export interface MarkerI {
 
 interface MapProps {
   center: [number, number],
-  data: { fires: Map_fires[], campaigns: Map_campaigns[] },
+  data: { fires: MapFire[], campaigns: MapCampaign[] },
   height?: number,
 }
 
@@ -26,7 +27,7 @@ export const MapComponent: FCWithFragment<MapProps> = ({ center, height = 100, d
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           attribution=''
         />
-        {data.fires.map(({ latitude, longitude }, i) => <Marker key={`fire-${i}`} position={[latitude!, longitude!]} icon={IconMap.fire} />)}
+        {data.fires.map(({ latitude, longitude }, i) => <Marker key={`fire-${i}`} position={[latitude, longitude]} icon={IconMap.fire} />)}
         {data.campaigns.map(({ corporation }, i) => {
           const { latitude, longitude } = corporation!
           return <Marker key={`campaign-${i}`} position={[latitude!, longitude!]} icon={IconMap.campaign} />

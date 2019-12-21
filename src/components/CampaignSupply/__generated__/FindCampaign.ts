@@ -38,8 +38,8 @@ export interface FindCampaign_campaign {
 
 export interface FindCampaign_fires {
   __typename: "Fire";
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export interface FindCampaign_campaigns_corporation {

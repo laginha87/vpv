@@ -42,8 +42,8 @@ export interface CampaignShow_campaigns {
 
 export interface CampaignShow_fires {
   __typename: "Fire";
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export interface CampaignShow {

@@ -8,6 +8,6 @@
 
 export interface MapFire {
   __typename: "Fire";
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
