@@ -8,11 +8,11 @@
 
 export interface MapCampaign_corporation {
   __typename: "Corporation";
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export interface MapCampaign {
   __typename: "Campaign";
-  corporation: MapCampaign_corporation | null;
+  corporation: MapCampaign_corporation;
 }

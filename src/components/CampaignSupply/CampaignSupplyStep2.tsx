@@ -7,18 +7,16 @@ import { FCWithFragment } from '~store/types'
 import { SupplyConfirm } from './SupplyConfirm'
 import { CampaignSupplyStep2Fragment } from './__generated__/CampaignSupplyStep2Fragment'
 
-export const CampaignSupplyStep2: FCWithFragment<{ campaign: CampaignSupplyStep2Fragment }> = ({ campaign }) => {
+export const CampaignSupplyStep2: FCWithFragment<{ campaign: CampaignSupplyStep2Fragment }> = ({ campaign: { corporation: { name }, campaignSupplies } }) => {
   const { values, isValid } = useFormikContext<CampaignSupplyForm>()
-  const { name } = campaign.corporation!
 
   const { nextStep, previousStep } = useContext(StepContext)!
 
   const filledQuantities = useMemo(() => {
     const filled = values.campaignSupplies.filter((e) => e.quantity > 0)
-    return campaign!
-      .campaignSupplies!
+    return campaignSupplies
       .map((campaignSupply, index) => ({ index, campaignSupply }))
-      .filter((e) => filled.findIndex(({ supplyId }) => supplyId.toString() === e!.campaignSupply!.supply!.id!) > -1)
+      .filter(({ campaignSupply: { supply: { id } } }) => filled.findIndex(({ supplyId }) => supplyId.toString() === id) > -1)
   }, [])
 
   return (

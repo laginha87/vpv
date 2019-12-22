@@ -10,7 +10,7 @@ import { CreateCampaignContributionInput } from "./../../../../__generated__/glo
 
 export interface CreateCampaignContribution_createCampaignContribution_campaignContribution {
   __typename: "CampaignContribution";
-  id: string | null;
+  id: string;
 }
 
 export interface CreateCampaignContribution_createCampaignContribution {

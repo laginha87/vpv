@@ -4,12 +4,14 @@ import { Formik } from 'formik'
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import * as yup from 'yup'
-import { FindCampaign } from '~components/CampaignShow/__generated__/FindCampaign'
+import { FindCampaign } from '~components/CampaignSupply/__generated__/FindCampaign'
 import CreateCampaignContribution from '~components/CampaignSupply/CampaignSupplyMutation.graphql'
 import { CampaignSupplyStep1 } from '~components/CampaignSupply/CampaignSupplyStep1'
 import { CampaignSupplyStep2 } from '~components/CampaignSupply/CampaignSupplyStep2'
 import { CampaignSupplyStep3 } from '~components/CampaignSupply/CampaignSupplyStep3'
 import { FormikCallback } from '~types/formik'
+import { filter } from 'graphql-anywhere';
+import { CreateCampaignContribution as CreateCampaignContributionType } from './__generated__/CreateCampaignContribution'
 
 interface IStepContext {
   nextStep: () => void,
@@ -17,7 +19,7 @@ interface IStepContext {
   currentStep: number,
 }
 
-export const StepContext = createContext<IStepContext | null>(null)
+export const StepContext = createContext<IStepContext>({ currentStep: 1, nextStep: () => { }, previousStep: () => { } })
 export interface CampaignSupplyComponent {
 
 }
@@ -58,6 +60,7 @@ const CampaignSupplyScreen: React.FC<CampaignSupplyComponent> = () => {
           }
           ...CampaignSupplyStep1Fragment
           ...CampaignSupplyStep2Fragment
+          ...CampaignSupplyStep3Fragment
         }
           fires {
             ...MapFire
@@ -68,6 +71,7 @@ const CampaignSupplyScreen: React.FC<CampaignSupplyComponent> = () => {
       }
       ${CampaignSupplyStep1.fragments}
       ${CampaignSupplyStep2.fragments}
+      ${CampaignSupplyStep3.fragments}
     `, { variables: { id } }
   )
 
@@ -86,7 +90,7 @@ const CampaignSupplyScreen: React.FC<CampaignSupplyComponent> = () => {
     [setStep]
   )
 
-  const [createContribution, { data: createCampaignContribution }] = useMutation(CreateCampaignContribution)
+  const [createContribution, { data: createCampaignContribution }] = useMutation<CreateCampaignContributionType>(CreateCampaignContribution)
 
   const handleSubmit = useCallback<FormikCallback<CampaignSupplyForm>>(
     async ({ campaignSupplies }, { setSubmitting }) => {
@@ -96,7 +100,7 @@ const CampaignSupplyScreen: React.FC<CampaignSupplyComponent> = () => {
           input: {
             campaignId: id,
             userId: 1,
-            contributionSupplies: campaignSupplies
+            contributionSupplies: campaignSupplies.map(({ supplyId, ...rest }) => rest)
           }
         }
       })
@@ -119,17 +123,16 @@ const CampaignSupplyScreen: React.FC<CampaignSupplyComponent> = () => {
   }
 
   const { campaign } = data!
-  const { corporation } = campaign
 
-  const initialValues = campaign.campaignSupplies!.map(({ id: campaignSupplyId }) => ({ campaignSupplyId, quantity: 0 }))
+  const initialValues = campaign.campaignSupplies.map(({ id: campaignSupplyId, supply: { id: supplyId } }) => ({ supplyId: parseInt(supplyId, 10), campaignSupplyId: parseInt(campaignSupplyId, 10), quantity: 0 }))
   const context: IStepContext = { nextStep, previousStep, currentStep: step }
   return (
     <Formik initialValues={{ campaignSupplies: initialValues }} onSubmit={handleSubmit} validationSchema={SCHEMA}>
       <StepContext.Provider value={context}>
         {
-          step === 1 ? <CampaignSupplyStep1 campaign={campaign} mapData={{ fires: data!.fires, campaigns: data!.campaigns }} corporation={corporation} />
+          step === 1 ? <CampaignSupplyStep1 campaign={campaign} mapData={{ ...data }} />
             : step === 2 ? <CampaignSupplyStep2 campaign={campaign} />
-              : <CampaignSupplyStep3 campaign={campaign} corporation={corporation} />
+              : <CampaignSupplyStep3 campaign={campaign} mapData={{ ...data! }} />
         }
       </StepContext.Provider>
     </Formik>)

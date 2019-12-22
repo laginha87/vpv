@@ -65,4 +65,4 @@ export const tailwindClassNames = (props: Partial<TailwindPropsInner>, ...rest) 
   return classNames(tailwindClasses, rest)
 }
 
-export type TailwindProps<T extends keyof TailwindPropsInner> = Pick<TailwindPropsInner, T>;
+export type TailwindProps<Required extends keyof TailwindPropsInner, Optional extends keyof TailwindPropsInner = never> = Pick<TailwindPropsInner, Required> & Partial<Pick<TailwindPropsInner, Optional>>;

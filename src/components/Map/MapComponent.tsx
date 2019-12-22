@@ -13,9 +13,13 @@ export interface MarkerI {
   type: 'fire' | 'campaign'
 }
 
+export interface MapData {
+  fires: MapFire[],
+  campaigns: MapCampaign[]
+}
 interface MapProps {
   center: [number, number],
-  data: { fires: MapFire[], campaigns: MapCampaign[] },
+  data: MapData,
   height?: number,
 }
 

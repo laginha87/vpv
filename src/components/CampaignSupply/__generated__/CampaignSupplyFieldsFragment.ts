@@ -8,19 +8,19 @@
 
 export interface CampaignSupplyFieldsFragment_campaignSupplies_supply {
   __typename: "Supply";
-  name: string | null;
-  icon: string | null;
-  id: string | null;
+  name: string;
+  icon: string;
+  id: string;
 }
 
 export interface CampaignSupplyFieldsFragment_campaignSupplies {
   __typename: "CampaignSupply";
-  quantityNeeded: number | null;
-  quantitySupplied: number | null;
-  supply: CampaignSupplyFieldsFragment_campaignSupplies_supply | null;
+  quantityNeeded: number;
+  quantitySupplied: number;
+  supply: CampaignSupplyFieldsFragment_campaignSupplies_supply;
 }
 
 export interface CampaignSupplyFieldsFragment {
   __typename: "Campaign";
-  campaignSupplies: CampaignSupplyFieldsFragment_campaignSupplies[] | null;
+  campaignSupplies: CampaignSupplyFieldsFragment_campaignSupplies[];
 }

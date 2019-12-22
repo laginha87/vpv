@@ -8,15 +8,15 @@
 
 export interface SupplyConfirmFragment_supply {
   __typename: "Supply";
-  name: string | null;
-  id: string | null;
-  description: string | null;
-  icon: string | null;
+  name: string;
+  id: string;
+  description: string;
+  icon: string;
 }
 
 export interface SupplyConfirmFragment {
   __typename: "CampaignSupply";
-  supply: SupplyConfirmFragment_supply | null;
-  quantityNeeded: number | null;
-  quantitySupplied: number | null;
+  supply: SupplyConfirmFragment_supply;
+  quantityNeeded: number;
+  quantitySupplied: number;
 }

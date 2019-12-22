@@ -8,26 +8,26 @@
 
 export interface CampaignSupplyStep2Fragment_corporation {
   __typename: "Corporation";
-  name: string | null;
+  name: string;
 }
 
 export interface CampaignSupplyStep2Fragment_campaignSupplies_supply {
   __typename: "Supply";
-  name: string | null;
-  id: string | null;
-  description: string | null;
-  icon: string | null;
+  name: string;
+  id: string;
+  description: string;
+  icon: string;
 }
 
 export interface CampaignSupplyStep2Fragment_campaignSupplies {
   __typename: "CampaignSupply";
-  supply: CampaignSupplyStep2Fragment_campaignSupplies_supply | null;
-  quantityNeeded: number | null;
-  quantitySupplied: number | null;
+  supply: CampaignSupplyStep2Fragment_campaignSupplies_supply;
+  quantityNeeded: number;
+  quantitySupplied: number;
 }
 
 export interface CampaignSupplyStep2Fragment {
   __typename: "Campaign";
-  corporation: CampaignSupplyStep2Fragment_corporation | null;
-  campaignSupplies: CampaignSupplyStep2Fragment_campaignSupplies[] | null;
+  corporation: CampaignSupplyStep2Fragment_corporation;
+  campaignSupplies: CampaignSupplyStep2Fragment_campaignSupplies[];
 }

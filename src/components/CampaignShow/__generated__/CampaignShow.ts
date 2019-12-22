@@ -8,36 +8,36 @@
 
 export interface CampaignShow_campaign_corporation {
   __typename: "Corporation";
-  name: string | null;
+  name: string;
 }
 
 export interface CampaignShow_campaign_campaignSupplies_supply {
   __typename: "Supply";
-  name: string | null;
+  name: string;
 }
 
 export interface CampaignShow_campaign_campaignSupplies {
   __typename: "CampaignSupply";
-  quantityNeeded: number | null;
-  quantitySupplied: number | null;
-  supply: CampaignShow_campaign_campaignSupplies_supply | null;
+  quantityNeeded: number;
+  quantitySupplied: number;
+  supply: CampaignShow_campaign_campaignSupplies_supply;
 }
 
 export interface CampaignShow_campaign {
   __typename: "Campaign";
-  corporation: CampaignShow_campaign_corporation | null;
-  campaignSupplies: CampaignShow_campaign_campaignSupplies[] | null;
+  corporation: CampaignShow_campaign_corporation;
+  campaignSupplies: CampaignShow_campaign_campaignSupplies[];
 }
 
 export interface CampaignShow_campaigns_corporation {
   __typename: "Corporation";
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export interface CampaignShow_campaigns {
   __typename: "Campaign";
-  corporation: CampaignShow_campaigns_corporation | null;
+  corporation: CampaignShow_campaigns_corporation;
 }
 
 export interface CampaignShow_fires {

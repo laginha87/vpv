@@ -3,18 +3,20 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: CampaignCard
+// GraphQL fragment: CampaignSupplyStep3Fragment
 // ====================================================
 
-export interface CampaignCard_corporation {
+export interface CampaignSupplyStep3Fragment_corporation {
   __typename: "Corporation";
+  id: string;
   name: string;
+  latitude: number;
+  longitude: number;
 }
 
-export interface CampaignCard {
+export interface CampaignSupplyStep3Fragment {
   __typename: "Campaign";
-  endDatetime: any;
-  completion: number;
   id: string;
-  corporation: CampaignCard_corporation;
+  endDatetime: any;
+  corporation: CampaignSupplyStep3Fragment_corporation;
 }

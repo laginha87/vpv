@@ -8,32 +8,34 @@
 
 export interface FindCampaign_campaign_campaignSupplies_supply {
   __typename: "Supply";
-  name: string | null;
-  icon: string | null;
-  id: string | null;
-  description: string | null;
+  name: string;
+  icon: string;
+  id: string;
+  description: string;
 }
 
 export interface FindCampaign_campaign_campaignSupplies {
   __typename: "CampaignSupply";
   id: string;
-  quantityNeeded: number | null;
-  quantitySupplied: number | null;
-  supply: FindCampaign_campaign_campaignSupplies_supply | null;
+  quantityNeeded: number;
+  quantitySupplied: number;
+  supply: FindCampaign_campaign_campaignSupplies_supply;
 }
 
 export interface FindCampaign_campaign_corporation {
   __typename: "Corporation";
-  name: string | null;
-  latitude: number | null;
-  longitude: number | null;
+  name: string;
+  latitude: number;
+  longitude: number;
+  id: string;
 }
 
 export interface FindCampaign_campaign {
   __typename: "Campaign";
   id: string;
-  campaignSupplies: FindCampaign_campaign_campaignSupplies[] | null;
-  corporation: FindCampaign_campaign_corporation | null;
+  campaignSupplies: FindCampaign_campaign_campaignSupplies[];
+  corporation: FindCampaign_campaign_corporation;
+  endDatetime: any;
 }
 
 export interface FindCampaign_fires {
@@ -44,13 +46,13 @@ export interface FindCampaign_fires {
 
 export interface FindCampaign_campaigns_corporation {
   __typename: "Corporation";
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export interface FindCampaign_campaigns {
   __typename: "Campaign";
-  corporation: FindCampaign_campaigns_corporation | null;
+  corporation: FindCampaign_campaigns_corporation;
 }
 
 export interface FindCampaign {

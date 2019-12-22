@@ -8,23 +8,23 @@
 
 export interface CampaignStatus_corporation {
   __typename: "Corporation";
-  name: string | null;
+  name: string;
 }
 
 export interface CampaignStatus_campaignSupplies_supply {
   __typename: "Supply";
-  name: string | null;
+  name: string;
 }
 
 export interface CampaignStatus_campaignSupplies {
   __typename: "CampaignSupply";
-  quantityNeeded: number | null;
-  quantitySupplied: number | null;
-  supply: CampaignStatus_campaignSupplies_supply | null;
+  quantityNeeded: number;
+  quantitySupplied: number;
+  supply: CampaignStatus_campaignSupplies_supply;
 }
 
 export interface CampaignStatus {
   __typename: "Campaign";
-  corporation: CampaignStatus_corporation | null;
-  campaignSupplies: CampaignStatus_campaignSupplies[] | null;
+  corporation: CampaignStatus_corporation;
+  campaignSupplies: CampaignStatus_campaignSupplies[];
 }

@@ -2,6 +2,7 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
+      'yellow-50': 'rgba(246, 174, 66, 0.16)',
       'yellow-100': '#F8C06D',
       'yellow-200': '#F6AE42',
       'yellow-300': '#D7850A',
@@ -9,6 +10,7 @@ module.exports = {
       'grey-10': '#F9F9F9',
       'grey-200': '#F3F4F5',
       'grey-300': '#EDF2F5',
+      'grey-400': '#EBECEC',
       'grey-500': '#AAB3BB',
       'grey-800': '#76879A',
       'grey-900': '#303336',

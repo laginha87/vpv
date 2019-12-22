@@ -10,14 +10,14 @@ export const CampaignStatus: FCWithFragment<{
   const { corporation, campaignSupplies } = campaign
   return (
     <div>
-      <div className='text-center text-grey-900 font-bold text-xl mb-4'>Paulo, a {corporation!.name} <br /> precisa de:</div>
+      <div className='text-center text-grey-900 font-bold text-xl mb-4'>Paulo, a {corporation.name} <br /> precisa de:</div>
 
       <VoluntaryLabel number={87} />
-      {campaignSupplies!.map(({ quantityNeeded, quantitySupplied, supply }, i) => (
+      {campaignSupplies.map(({ quantityNeeded, quantitySupplied, supply }, i) => (
         <div className='py-4 border-b border-grey-200' key={i}>
-          <Progress.Bar key={i} percentage={(quantitySupplied! / quantityNeeded!) * 100} />
+          <Progress.Bar key={i} percentage={(quantitySupplied / quantityNeeded) * 100} />
           <div className='flex'>
-            <div className='w-1/2 font-semibold'>{supply!.name}</div>
+            <div className='w-1/2 font-semibold'>{supply.name}</div>
             <div className='w-1/2 text-right font-book text-grey-800'> Faltam {quantitySupplied} de {quantityNeeded}</div>
           </div>
         </div>))}

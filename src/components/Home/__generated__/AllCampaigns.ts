@@ -8,15 +8,15 @@
 
 export interface AllCampaigns_campaigns_corporation {
   __typename: "Corporation";
-  name: string | null;
+  name: string;
 }
 
 export interface AllCampaigns_campaigns {
   __typename: "Campaign";
   id: string;
-  endDatetime: any | null;
-  completion: number | null;
-  corporation: AllCampaigns_campaigns_corporation | null;
+  endDatetime: any;
+  completion: number;
+  corporation: AllCampaigns_campaigns_corporation;
 }
 
 export interface AllCampaigns {

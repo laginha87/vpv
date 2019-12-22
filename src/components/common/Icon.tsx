@@ -8,7 +8,7 @@ export type IconName = typeof ICON_NAMES[number];
 
 const IconImages: { [k in IconName]: FC<{ fill: TailwindColor, className: string }> } = Icons as any
 
-interface IconProps extends Partial<TailwindProps<'p' | 'w' | 'bg' | 'rounded'>> {
+interface IconProps extends Partial<TailwindProps<'p' | 'w' | 'bg' | 'rounded'|'m'>> {
   icon: IconName,
   fill?: TailwindColor,
 }

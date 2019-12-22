@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start-dev": "parcel src/index.html",
     "lint": "standardx '**/*.ts' '**/*.tsx'",
-    "graphql-generate": "graphql-codegen --config .graphql-codegen.yml"
+    "graphql-generate": "apollo client:codegen --target typescript --watch",
+    "start": "npm-run-all --parallel start-dev graphql-generate"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
@@ -30,7 +31,6 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "src": "^1.1.2",
     "tailwindcss": "^1.1.2",
     "yup": "^0.27.0"
   },
@@ -52,6 +52,7 @@
     "apollo": "^2.21.2",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
+    "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.4",
     "postcss-import": "^12.0.1",
     "standardx": "^5.0.0",
