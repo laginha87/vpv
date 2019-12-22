@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from 'apollo-boost'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Progress from '~components/common/Progress'
