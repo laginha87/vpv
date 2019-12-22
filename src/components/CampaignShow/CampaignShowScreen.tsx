@@ -38,7 +38,10 @@ const CampaignShowScreen: React.FC<CampaignShowComponentProps> = () => {
   }
 
   return (
-    <Layouts.WithMap mapHeight={20} data={data} center={[38.736946, -9.142685]} icon='house' back='/' >
+    <Layouts.WithMap
+      mapHeight={20} data={data} center={[38.736946, -9.142685]} icon={() =>
+        <Link to='/'><Icon icon='house' m={4} p={4} bg='grey-100' rounded='full' /></Link>}
+    >
       <CampaignStatus campaign={data.campaign} />
       <BottomCard>
         <div className='flex justify-between mb-4 font-semibold'>

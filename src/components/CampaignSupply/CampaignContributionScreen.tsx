@@ -25,16 +25,15 @@ export const CampaignContributionScreen: React.FC = () => {
       }
       ${CampaignContributionItem.fragments}
     `, {
-    variables: {
-      id
+      variables: {
+        id
+      }
     }
-  }
   )
 
   if (loading) {
     return <div />
   }
-
 
   const {
     campaignContribution: {
@@ -42,7 +41,8 @@ export const CampaignContributionScreen: React.FC = () => {
         corporation: { name }
       },
       campaignContributionSupplies
-    } } = data!;
+    }
+  } = data!
 
   return (
     <div className='px-6 bg-grey-100 h-screen'>
@@ -51,8 +51,10 @@ export const CampaignContributionScreen: React.FC = () => {
       </div>
       <div className='font-bold text-grey-900 mb-4 text-center'>Obrigado por ajudares os Bombeiros Voluntários de {name}!</div>
 
-      <List collection={campaignContributionSupplies}
-        render={(e) => <CampaignContributionItem campaignContributionSupply={e} key={e.id} />} />
+      <List
+        collection={campaignContributionSupplies}
+        render={(e) => <CampaignContributionItem campaignContributionSupply={e} key={e.id} />}
+      />
 
       <div className='mt-16'>
         <div className='text-center text-grey-500'>

@@ -10,7 +10,7 @@ import { CampaignSupplyStep1 } from '~components/CampaignSupply/CampaignSupplySt
 import { CampaignSupplyStep2 } from '~components/CampaignSupply/CampaignSupplyStep2'
 import { CampaignSupplyStep3 } from '~components/CampaignSupply/CampaignSupplyStep3'
 import { FormikCallback } from '~types/formik'
-import { filter } from 'graphql-anywhere';
+import { filter } from 'graphql-anywhere'
 import { CreateCampaignContribution as CreateCampaignContributionType } from './__generated__/CreateCampaignContribution'
 
 interface IStepContext {

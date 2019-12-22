@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { TailwindMargin, tailwindClassNames, TailwindProps } from '~styles';
+import { TailwindMargin, tailwindClassNames, TailwindProps } from '~styles'
 export const BUTTON_TYPES = ['primary', 'secondary', 'link'] as const
 
 type ButtonTheme = typeof BUTTON_TYPES[number];

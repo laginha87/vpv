@@ -15,7 +15,8 @@ export const CampaignContributionItem: FCWithFragment<Props> = ({
         icon
       }
     }
-  } }) => {
+  }
+}) => {
   return (
     <div className='flex items-center'>
       <Icon icon={icon as IconName} w={10} />

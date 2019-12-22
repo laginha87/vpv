@@ -6,6 +6,7 @@ import { BottomCard, Button, Icon } from '~components/common'
 import { FCWithFragment } from '~store/types'
 import { SupplyConfirm } from './SupplyConfirm'
 import { CampaignSupplyStep2Fragment } from './__generated__/CampaignSupplyStep2Fragment'
+import { Link } from 'react-router-dom'
 
 export const CampaignSupplyStep2: FCWithFragment<{ campaign: CampaignSupplyStep2Fragment }> = ({ campaign: { corporation: { name }, campaignSupplies } }) => {
   const { values, isValid } = useFormikContext<CampaignSupplyForm>()
@@ -38,7 +39,7 @@ export const CampaignSupplyStep2: FCWithFragment<{ campaign: CampaignSupplyStep2
       <BottomCard>
         <div className='flex flex-col'>
           <Button theme='primary' disabled={!isValid} onClick={nextStep}>Estou Pronto a entregar</Button>
-          <div className='text-grey-500 text-center mt-4' onClick={previousStep}>Não Consigo Fazer Esta Entrega</div>
+          <Button theme='link' mt={4}> <Link to='/'>Não Consigo Fazer Esta Entrega</Link></Button>
         </div>
       </BottomCard>
     </div>
