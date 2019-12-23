@@ -42,13 +42,16 @@ export const MapComponent: FCWithFragment<MapProps> = ({ center, height = 100, d
 
 MapComponent.fragments = gql`
 fragment MapFire on Fire {
-      latitude
-      longitude
-    }
+  id
+  latitude
+  longitude
+}
 fragment MapCampaign on Campaign {
-      corporation {
-        latitude
-        longitude
-      }
+  id
+  corporation {
+    id
+    latitude
+    longitude
   }
+}
 `

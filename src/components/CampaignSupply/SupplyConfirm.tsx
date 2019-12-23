@@ -42,13 +42,14 @@ export const SupplyConfirm: FCWithFragment<SupplyConfirmProps> = ({ campaignSupp
 
 SupplyConfirm.fragments = gql`
 fragment SupplyConfirmFragment on CampaignSupply {
-  supply {
-      name
-      id
-      description
-      icon
-  }
+  id
   quantityNeeded
   quantitySupplied
+  supply {
+    id
+    name
+    description
+    icon
+  }
 }
 `

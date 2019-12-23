@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'
 import Progress from '~components/common/Progress'
 import { VoluntaryLabel } from '~components/common/VoluntaryLabel'
 import { FCWithFragment } from '~store/types'
-import { humanize } from './HomeScreen'
+import { humanize } from '~utils/date'
 import { CampaignCard as Campaign } from './__generated__/CampaignCard'
 
 export const CampaignCard: FCWithFragment<{
   campaign: Campaign;
-}> = ({ campaign: { endDatetime, completion, id, corporation } }) => (
+}> = ({ campaign: { endDatetime, completion, id, corporation, numberOfVolunteers } }) => (
   <Link className='rounded block shadow p-5 mb-4 select-none' to={`/campaigns/${id}`}>
     <div className='text-grey-900 font-bold text-xl mb-2'>{corporation!.name}</div>
-    <VoluntaryLabel number={100} />
+    <VoluntaryLabel number={numberOfVolunteers} />
     <div className='text-grey-500 mb-2 text-xs font-medium'>Estás a X minutos de carro</div>
     <Progress.Bar percentage={completion} />
     <div className='flex justify-between mt-2'>
@@ -24,11 +24,13 @@ export const CampaignCard: FCWithFragment<{
 
 CampaignCard.fragments = gql`
 fragment CampaignCard on Campaign {
+    id
     endDatetime
     completion
-    id
+    numberOfVolunteers
     corporation {
-        name
+      id
+      name
     }
 }
 `

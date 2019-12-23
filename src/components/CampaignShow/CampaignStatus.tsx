@@ -7,12 +7,12 @@ import { CampaignStatus as Campaign } from './__generated__/CampaignStatus'
 export const CampaignStatus: FCWithFragment<{
   campaign: Campaign
 }> = ({ campaign }) => {
-  const { corporation, campaignSupplies } = campaign
+  const { corporation, campaignSupplies, numberOfVolunteers } = campaign
   return (
     <div>
       <div className='text-center text-grey-900 font-bold text-xl mb-4'>Paulo, a {corporation.name} <br /> precisa de:</div>
 
-      <VoluntaryLabel number={87} />
+      <VoluntaryLabel number={numberOfVolunteers} />
       {campaignSupplies.map(({ quantityNeeded, quantitySupplied, supply }, i) => (
         <div className='py-4 border-b border-grey-200' key={i}>
           <Progress.Bar key={i} percentage={(quantitySupplied / quantityNeeded) * 100} />
@@ -26,15 +26,20 @@ export const CampaignStatus: FCWithFragment<{
 
 CampaignStatus.fragments = gql`
 fragment CampaignStatus on Campaign {
-    corporation {
-        name
+  id
+  numberOfVolunteers
+  corporation {
+    id
+    name
+  }
+  campaignSupplies {
+    id
+    quantityNeeded
+    quantitySupplied
+    supply {
+      id
+      name
     }
-    campaignSupplies {
-        quantityNeeded
-        quantitySupplied
-        supply {
-            name
-        }
-    }
+  }
 }
 `

@@ -13,12 +13,16 @@ export const CampaignContributionScreen: React.FC = () => {
     gql`
       query FindCampaignContribution($id: ID!){
         campaignContribution(id: $id) {
+          id
           campaign {
+            id
             corporation {
+              id
               name
             }
           }
           campaignContributionSupplies {
+            id
             ...CampaignContributionItemFragment
           }
         }

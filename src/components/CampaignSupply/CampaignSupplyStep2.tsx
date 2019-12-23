@@ -47,10 +47,13 @@ export const CampaignSupplyStep2: FCWithFragment<{ campaign: CampaignSupplyStep2
 }
 CampaignSupplyStep2.fragments = gql`
 fragment CampaignSupplyStep2Fragment on Campaign {
+  id
   corporation {
+    id
     name
   }
   campaignSupplies {
+    id
     ...SupplyConfirmFragment
     supply {
       id

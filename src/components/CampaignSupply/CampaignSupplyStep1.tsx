@@ -26,6 +26,7 @@ CampaignSupplyStep1.fragments = gql`
   fragment CampaignSupplyStep1Fragment on Campaign {
     id
     corporation {
+      id
       name
       latitude
       longitude

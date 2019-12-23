@@ -6,6 +6,7 @@ import { CampaignStatus } from '~components/CampaignShow/CampaignStatus'
 import { BottomCard, Button, Icon, Progress } from '~components/common'
 import { useId } from '~components/common/useId'
 import { Layouts } from '~components/Layouts'
+import { humanize } from '~utils/date'
 
 export interface CampaignShowComponentProps {
 
@@ -17,12 +18,16 @@ const CampaignShowScreen: React.FC<CampaignShowComponentProps> = () => {
   const { data, loading } = useQuery(gql`
     query CampaignShow($id: ID!) {
       campaign(id: $id) {
+        id
+        endDatetime
         ...CampaignStatus
       }
       campaigns {
+        id
         ...MapCampaign
       }
       fires {
+        id
         ...MapFire
       }
     }
@@ -48,7 +53,7 @@ const CampaignShowScreen: React.FC<CampaignShowComponentProps> = () => {
           <div className='flex items-center'>
             <Progress.Radial percentage={0.5} />
 
-            <div className='ml-1'>Até ás 20h00</div>
+            <div className='ml-1'>{humanize(data.campaign.endDatetime)}</div>
           </div>
           <a className='text-grey-800'>Partilhar esta campanha</a>
         </div>

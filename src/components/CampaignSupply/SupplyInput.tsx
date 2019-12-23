@@ -14,12 +14,8 @@ export const SupplyInput: FCWithFragment<{ campaignSupply: SupplyInputFragment, 
   return (
     <div>
       <div className='flex items-center'>
-        <div onClick={toggleActive} className='w-5 h-5 mr-4 cursor-pointer'>
-          <Icon icon={active ? 'active' : 'inactive'} />
-        </div>
-        <div className='mr-2'>
-          <Icon icon={icon as any} w={10} bg='grey-300' rounded='default' />
-        </div>
+        <Icon w={6} mr={4} icon={active ? 'active' : 'inactive'} onClick={toggleActive} />
+        <Icon icon={icon as any} w={10} bg='grey-300' rounded='default' mr={2} />
         <div>
           <div className='font-semibold text-grey-900'>{name}</div>
           <div className='font-medium text-xs text-grey-800'>Até {quantityLimit} {name}</div>
@@ -34,11 +30,12 @@ export const SupplyInput: FCWithFragment<{ campaignSupply: SupplyInputFragment, 
 }
 
 SupplyInput.fragments = gql`fragment SupplyInputFragment on CampaignSupply {
-     quantityNeeded
-     quantitySupplied
-     supply {
-         name
-         icon
-         id
-     }
+  id
+  quantityNeeded
+  quantitySupplied
+  supply {
+    id
+    name
+    icon
+  }
 }`

@@ -6,6 +6,7 @@ import { BottomCard, Button, Icon, List, Progress } from '~components/common'
 import { FCWithFragment } from '~store/types'
 import { SupplyInput } from './SupplyInput'
 import { CampaignSupplyFieldsFragment } from './__generated__/CampaignSupplyFieldsFragment'
+import { humanize } from '~utils/date'
 
 export const CampaignSupplyFields: FCWithFragment<{ campaign: CampaignSupplyFieldsFragment }> = ({ campaign }) => {
   const { errors, isValid, dirty } = useFormikContext<CampaignSupplyForm>()
@@ -24,7 +25,7 @@ export const CampaignSupplyFields: FCWithFragment<{ campaign: CampaignSupplyFiel
           <div className='flex items-center'>
             <Progress.Radial percentage={0.5} />
 
-            <div className='ml-1'>Até ás 20h00</div>
+            <div className='ml-1'>{humanize(campaign.endDatetime)}</div>
           </div>
           <a className='text-grey-800'>Partilhar esta campanha</a>
         </div>
@@ -40,7 +41,10 @@ export const CampaignSupplyFields: FCWithFragment<{ campaign: CampaignSupplyFiel
 CampaignSupplyFields.fragments = gql`
 
 fragment CampaignSupplyFieldsFragment on Campaign {
+  id
+  endDatetime
   campaignSupplies {
+    id
     ...SupplyInputFragment
   }
 }

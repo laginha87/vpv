@@ -62,9 +62,11 @@ const CampaignSupplyScreen: React.FC<CampaignSupplyComponent> = () => {
           ...CampaignSupplyStep3Fragment
         }
           fires {
+            id
             ...MapFire
         }
           campaigns{
+            id
             ...MapCampaign
         }
       }

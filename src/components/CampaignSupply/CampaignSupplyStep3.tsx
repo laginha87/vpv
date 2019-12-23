@@ -8,6 +8,7 @@ import { gql } from 'apollo-boost'
 import { CampaignSupplyStep3Fragment } from './__generated__/CampaignSupplyStep3Fragment'
 import { MapData } from '~components/Map/MapComponent'
 import { Link } from 'react-router-dom'
+import { humanize } from '~utils/date'
 
 interface Props {
   campaign: CampaignSupplyStep3Fragment,
@@ -35,7 +36,7 @@ export const CampaignSupplyStep3: FCWithFragment<Props> = ({ campaign, mapData }
         </RoundedCard>
       </div>
       <div className='text-center'>
-        Entrega o teu contributo á {name} até às {campaign.endDatetime}.
+        Entrega o teu contributo á {name} {humanize(campaign.endDatetime).toLowerCase()}.
       </div>
 
       <div className='text-grey-500 text-center'>
