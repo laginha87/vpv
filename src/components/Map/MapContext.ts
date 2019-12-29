@@ -11,7 +11,7 @@ interface MapContextI {
 export const MapContext = createContext<MapContextI>({
   data: { fires: [], campaigns: [] },
   center: [1, 1],
-  mapHeight: 10,
+  mapHeight: 0,
   loading: true,
   setData: () => { },
   setHeight: () => { },

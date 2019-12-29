@@ -8,3 +8,5 @@ export const humanize = (d: string) => {
     return `Até às ${e.toFormat('HH')}h${e.toFormat('MM')}`
   }
 }
+
+export const humanizeDuration = (d: string) => Math.floor(DateTime.fromISO(d).diffNow('minutes').minutes)

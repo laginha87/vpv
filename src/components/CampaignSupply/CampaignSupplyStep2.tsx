@@ -21,7 +21,7 @@ export const CampaignSupplyStep2: FCWithFragment<{ campaign: CampaignSupplyStep2
   }, [])
 
   return (
-    <div className='w-screen h-screen bg-grey-100 px-6'>
+    <div className='w-screen h-screen bg-grey-100 px-6 overflow-scroll pb-40'>
       <div className='py-6 flex justify-between items-center'>
         <div onClick={previousStep}>
           <Icon icon='arrowLeft' />

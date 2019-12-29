@@ -13,8 +13,8 @@ export const SupplyInput: FCWithFragment<{ campaignSupply: SupplyInputFragment, 
   const { name, icon } = supply!
   return (
     <div>
-      <div className='flex items-center'>
-        <Icon w={6} mr={4} icon={active ? 'active' : 'inactive'} onClick={toggleActive} />
+      <div className='flex items-center' onClick={toggleActive}>
+        <Icon w={6} mr={4} icon={active ? 'active' : 'inactive'} />
         <Icon icon={icon as any} w={10} bg='grey-300' rounded='default' mr={2} />
         <div>
           <div className='font-semibold text-grey-900'>{name}</div>

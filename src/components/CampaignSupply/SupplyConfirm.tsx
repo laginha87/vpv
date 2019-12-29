@@ -23,7 +23,7 @@ export const SupplyConfirm: FCWithFragment<SupplyConfirmProps> = ({ campaignSupp
     <div className='mb-4'>
       <RoundedCard>
         <div className='flex justify-between items-center'>
-          <div className='rounded py-2 text-center border-2 border-grey-300' style={{ width: 51, height: 40 }}>{values.campaignSupplies[index].quantity}</div>
+          <div className='rounded py-2 text-center border-2 border-grey-300 flex justify-center items-center' style={{ width: 51, height: 40 }}>{values.campaignSupplies[index].quantity}</div>
           <div>{name}</div>
           <Icon icon={icon as any} w={10} />
         </div>

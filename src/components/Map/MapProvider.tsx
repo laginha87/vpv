@@ -6,7 +6,7 @@ import { MapContext } from './MapContext'
 export const MapProvider: FC = ({ children }) => {
   const { loading } = useContext(MapContext)
   const [data, setData] = useState(null)
-  const [mapHeight, setHeight] = useState(10)
+  const [mapHeight, setHeight] = useState(0)
   const [center, setCenter] = useState([0, 0] as [number, number])
 
   return (

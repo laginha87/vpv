@@ -6,7 +6,7 @@ import { BottomCard, Button, Icon, MapPanel, RoundedCard } from '~components/com
 import { MapData } from '~components/Map/MapComponent'
 import { useMap } from '~components/Map/useMap'
 import { FCWithFragment } from '~store/types'
-import { humanize } from '~utils/date'
+import { humanize, humanizeDuration } from '~utils/date'
 
 import { CampaignSupplyStep3Fragment } from './__generated__/CampaignSupplyStep3Fragment'
 import { CampaignSupplyForm, StepContext } from './CampaignSupplyScreen'
@@ -42,7 +42,7 @@ export const CampaignSupplyStep3: FCWithFragment<Props> = ({ campaign, mapData: 
       </div>
 
       <div className='text-grey-500 text-center'>
-        faltam x minutos
+        faltam {humanizeDuration(campaign.endDatetime)} minutos
       </div>
 
       <BottomCard>
