@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost'
 import { useFormikContext } from 'formik'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { BottomCard, Button, Icon, MapPanel, RoundedCard } from '~components/common'
 import { MapData } from '~components/Map/MapComponent'
@@ -9,7 +9,7 @@ import { FCWithFragment } from '~store/types'
 import { humanize } from '~utils/date'
 
 import { CampaignSupplyStep3Fragment } from './__generated__/CampaignSupplyStep3Fragment'
-import { CampaignSupplyForm } from './CampaignSupplyScreen'
+import { CampaignSupplyForm, StepContext } from './CampaignSupplyScreen'
 
 interface Props {
   campaign: CampaignSupplyStep3Fragment,
@@ -19,11 +19,11 @@ interface Props {
 export const CampaignSupplyStep3: FCWithFragment<Props> = ({ campaign, mapData: data }) => {
   const { isValid, submitForm } = useFormikContext<CampaignSupplyForm>()
   const { corporation: { name, latitude, longitude } } = campaign
-  // const { previousStep } = useContext(StepContext)
+  const { previousStep } = useContext(StepContext)
   useMap({ height: 40, data, center: [latitude, longitude] })
 
   return (
-    <MapPanel height={40}>
+    <MapPanel height={40} icon={() => <div onClick={previousStep}><Icon icon='arrowLeft' m={4} p={4} bg='grey-100' rounded='full' /></div>}>
       <div className='font-bold text-grey-900 mb-4'>{name}</div>
       <div className='text-grey-500 mb-4'>{name}</div>
       <div className='mb-4'>

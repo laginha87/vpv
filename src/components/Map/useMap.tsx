@@ -13,7 +13,6 @@ export const useMap = ({ height, data, center }: useMapArgs) => {
   useEffect(() => {
     setHeight(height)
     return () => {
-      console.log('CALLED')
       setHeight(0)
     }
   }, [height])

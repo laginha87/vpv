@@ -51,21 +51,24 @@ const CampaignShowScreen: React.FC<CampaignShowComponentProps> = () => {
   }
 
   return (
-    <div className='p-6 rounded-t-lg absolute z-10 w-full bg-grey-100' style={{ top: '20vh', height: '80vh', overflow: 'scroll' }}>
-      <CampaignStatus campaign={data!.campaign} />
-      <BottomCard>
-        <div className='flex justify-between mb-4 font-semibold'>
-          <div className='flex items-center'>
-            <Progress.Radial percentage={0.5} />
+    <div className='p-6 rounded-t-lg absolute z-10 w-full bg-grey-100' style={{ top: '20vh', height: '80vh' }}>
+      <Link to='/' className='fixed z-10 top-0 left-0'> <Icon icon='house' m={4} p={4} bg='grey-100' rounded='full' /></Link>
+      <div className='overflow-scroll'>
+        <CampaignStatus campaign={data!.campaign} />
+        <BottomCard>
+          <div className='flex justify-between mb-4 font-semibold'>
+            <div className='flex items-center'>
+              <Progress.Radial percentage={0.5} />
 
-            <div className='ml-1'>{humanize(data!.campaign.endDatetime)}</div>
+              <div className='ml-1'>{humanize(data!.campaign.endDatetime)}</div>
+            </div>
+            <a className='text-grey-800'>Partilhar esta campanha</a>
           </div>
-          <a className='text-grey-800'>Partilhar esta campanha</a>
-        </div>
-        <Button theme='primary'>
-          <Link to={`/campaigns/${id}/supply`} className='flex items-center justify-center'> Escolher Donativos <Icon icon='chevronRight' w={6} /></Link>
-        </Button>
-      </BottomCard>
+          <Button theme='primary'>
+            <Link to={`/campaigns/${id}/supply`} className='flex items-center justify-center'> Escolher Donativos <Icon icon='chevronRight' w={6} /></Link>
+          </Button>
+        </BottomCard>
+      </div>
     </div>)
 }
 
