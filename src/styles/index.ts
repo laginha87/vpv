@@ -30,29 +30,33 @@ export interface TailwindPropsInner {
   mb: TailwindMargin,
   bg: TailwindColor,
   text: TailwindColor,
+  borderWidth: TailwindBorderWidth
+  borderColor: TailwindColor,
   w: TailwindWidth,
   rounded: TailwindBorderRadius,
 }
 
 const TailwindPropKeys: { [k in keyof TailwindPropsInner]: string } = {
-  p: '',
-  px: '',
-  py: '',
-  pl: '',
-  pr: '',
-  pt: '',
-  pb: '',
-  m: '',
-  mx: '',
-  my: '',
-  ml: '',
-  mr: '',
-  mt: '',
-  mb: '',
-  bg: '',
-  text: '',
-  w: '',
-  rounded: ''
+  p: 'p',
+  px: 'px',
+  py: 'py',
+  pl: 'pl',
+  pr: 'pr',
+  pt: 'pt',
+  pb: 'pb',
+  m: 'm',
+  mx: 'mx',
+  my: 'my',
+  ml: 'ml',
+  mr: 'mr',
+  mt: 'mt',
+  mb: 'mb',
+  bg: 'bg',
+  text: 'text',
+  w: 'w',
+  borderColor: 'border',
+  borderWidth: 'border',
+  rounded: 'rounded'
 }
 
 const TailwindPropsSet = new Set<string>(Object.keys(TailwindPropKeys))
@@ -61,7 +65,7 @@ export const tailwindClassNames = (props: Partial<TailwindPropsInner>, ...rest) 
   const tailwindClasses = Object
     .keys(props)
     .filter((e) => TailwindPropsSet.has(e))
-    .map((k) => props[k] === 'default' ? k : [k, props[k]].join('-')).join(' ')
+    .map((k) => props[k] === 'default' ? TailwindPropKeys[k] : [TailwindPropKeys[k], props[k]].join('-')).join(' ')
   return classNames(tailwindClasses, rest)
 }
 

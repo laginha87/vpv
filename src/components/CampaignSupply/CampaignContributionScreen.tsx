@@ -61,15 +61,13 @@ export const CampaignContributionScreen: React.FC = () => {
       />
 
       <div className='mt-16'>
-        <div className='text-center text-grey-500'>
+        <div className='text-center text-grey-500 mb-2'>
           Partilha com os teus amigos
         </div>
         <div className='flex justify-center'>
-          <Icon w={12} icon='people' />
-          <div className='mx-2'>
-            <Icon w={12} icon='people' />
-          </div>
-          <Icon w={12} icon='people' />
+          <Icon borderColor='grey-500' borderWidth={4} fill='black' p={4} w={8} icon='facebook' rounded='lg' />
+          <Icon borderColor='grey-500' borderWidth={4} fill='black' p={4} w={8} icon='twitter' rounded='lg' mx={2} />
+          <Icon borderColor='grey-500' borderWidth={4} fill='black' p={4} w={8} icon='linkedin' rounded='lg' />
         </div>
 
       </div>
