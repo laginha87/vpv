@@ -2,8 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import React from 'react'
 import { CampaignCard } from '~components/Home/CampaignCard'
-import { Layouts } from '~components/Layouts'
-import { WithMap } from '~components/Layouts/WithMap'
+import { useMap } from '~components/Map/useMap'
 
 export const HomeScreen = () => {
   const { data, loading } = useQuery(
@@ -19,19 +18,21 @@ export const HomeScreen = () => {
         ...MapFire
       }
     }
-      ${WithMap.fragments}
-      ${CampaignCard.fragments}
+    ${useMap.fragments}
+    ${CampaignCard.fragments}
     `
   ) as any
+
+  useMap({ height: 40, data })
 
   if (loading) {
     return <div />
   }
 
   return (
-    <Layouts.WithMap data={data} mapHeight={40} center={[38.736946, -9.142685]}>
+    <div className='p-6 rounded-t-lg absolute z-10 w-full bg-grey-100' style={{ top: '40vh', height: '60vh', overflow: 'scroll' }}>
       <div className='text-center text-grey-900 font-bold text-xl mb-4'>Campanhas ativas na tua área</div>
       {!loading && data!.campaigns.map((e) => <CampaignCard key={e.id} campaign={e} />)}
-    </Layouts.WithMap>
+    </div>
   )
 }

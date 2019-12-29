@@ -8,6 +8,7 @@
 
 export interface HomeComponentQuery_campaigns_corporation {
   __typename: "Corporation";
+  id: string;
   latitude: number;
   longitude: number;
   name: string;
@@ -15,14 +16,16 @@ export interface HomeComponentQuery_campaigns_corporation {
 
 export interface HomeComponentQuery_campaigns {
   __typename: "Campaign";
+  id: string;
   corporation: HomeComponentQuery_campaigns_corporation;
   endDatetime: any;
   completion: number;
-  id: string;
+  numberOfVolunteers: number;
 }
 
 export interface HomeComponentQuery_fires {
   __typename: "Fire";
+  id: string;
   latitude: number;
   longitude: number;
 }

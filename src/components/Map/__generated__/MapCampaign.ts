@@ -8,11 +8,13 @@
 
 export interface MapCampaign_corporation {
   __typename: "Corporation";
+  id: string;
   latitude: number;
   longitude: number;
 }
 
 export interface MapCampaign {
   __typename: "Campaign";
+  id: string;
   corporation: MapCampaign_corporation;
 }

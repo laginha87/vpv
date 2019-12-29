@@ -8,11 +8,13 @@
 
 export interface FindCampaignContribution_campaignContribution_campaign_corporation {
   __typename: "Corporation";
+  id: string;
   name: string;
 }
 
 export interface FindCampaignContribution_campaignContribution_campaign {
   __typename: "Campaign";
+  id: string;
   corporation: FindCampaignContribution_campaignContribution_campaign_corporation;
 }
 
@@ -37,6 +39,7 @@ export interface FindCampaignContribution_campaignContribution_campaignContribut
 
 export interface FindCampaignContribution_campaignContribution {
   __typename: "CampaignContribution";
+  id: string;
   campaign: FindCampaignContribution_campaignContribution_campaign;
   campaignContributionSupplies: FindCampaignContribution_campaignContribution_campaignContributionSupplies[];
 }

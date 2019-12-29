@@ -8,9 +8,9 @@
 
 export interface FindCampaign_campaign_campaignSupplies_supply {
   __typename: "Supply";
+  id: string;
   name: string;
   icon: string;
-  id: string;
   description: string;
 }
 
@@ -24,10 +24,10 @@ export interface FindCampaign_campaign_campaignSupplies {
 
 export interface FindCampaign_campaign_corporation {
   __typename: "Corporation";
+  id: string;
   name: string;
   latitude: number;
   longitude: number;
-  id: string;
 }
 
 export interface FindCampaign_campaign {
@@ -40,18 +40,21 @@ export interface FindCampaign_campaign {
 
 export interface FindCampaign_fires {
   __typename: "Fire";
+  id: string;
   latitude: number;
   longitude: number;
 }
 
 export interface FindCampaign_campaigns_corporation {
   __typename: "Corporation";
+  id: string;
   latitude: number;
   longitude: number;
 }
 
 export interface FindCampaign_campaigns {
   __typename: "Campaign";
+  id: string;
   corporation: FindCampaign_campaigns_corporation;
 }
 

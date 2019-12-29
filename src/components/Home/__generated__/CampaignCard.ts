@@ -8,13 +8,15 @@
 
 export interface CampaignCard_corporation {
   __typename: "Corporation";
+  id: string;
   name: string;
 }
 
 export interface CampaignCard {
   __typename: "Campaign";
+  id: string;
   endDatetime: any;
   completion: number;
-  id: string;
+  numberOfVolunteers: number;
   corporation: CampaignCard_corporation;
 }

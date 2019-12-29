@@ -8,13 +8,14 @@
 
 export interface SupplyInputFragment_supply {
   __typename: "Supply";
+  id: string;
   name: string;
   icon: string;
-  id: string;
 }
 
 export interface SupplyInputFragment {
   __typename: "CampaignSupply";
+  id: string;
   quantityNeeded: number;
   quantitySupplied: number;
   supply: SupplyInputFragment_supply;
