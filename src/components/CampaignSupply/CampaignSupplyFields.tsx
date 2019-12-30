@@ -18,7 +18,7 @@ export const CampaignSupplyFields: FCWithFragment<{ campaign: CampaignSupplyFiel
         <div className='text-center mb-5 text-grey-900 font-bold'>Seleciona os donativos da tua contribuição</div>
         <div className='text-center mb-8 text-grey-800 text-sm'>Podes escolher todos ou parte dos produtos que ainda faltam.</div>
         {errors.campaignSupplies && typeof (errors.campaignSupplies) === 'string' && <div className='text-red-100'>{errors.campaignSupplies}</div>}
-        <List collection={campaign.campaignSupplies} render={(e, i) => (<SupplyInput campaignSupply={e} key={e.id} index={i} />)} />
+        <List collection={campaign.campaignSupplies.filter((e) => e.quantityNeeded > e.quantitySupplied)} render={(e, i) => (<SupplyInput campaignSupply={e} key={e.id} index={i} />)} />
       </div>
       <BottomCard>
         <div className='flex justify-between mb-4 font-semibold'>
