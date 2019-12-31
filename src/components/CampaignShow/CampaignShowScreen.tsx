@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { CampaignStatus } from '~components/CampaignShow/CampaignStatus'
 import { BottomCard, Button, Icon, Progress } from '~components/common'
 import { useId } from '~components/common/useId'
-import { humanize } from '~utils/date'
 import { useMap } from '~components/Map/useMap'
+import { humanize } from '~utils/date'
 import { CampaignShow } from './__generated__/CampaignShow'
 
 export interface CampaignShowComponentProps {
@@ -52,7 +52,7 @@ const CampaignShowScreen: React.FC<CampaignShowComponentProps> = () => {
 
   return (
     <div className='p-6 rounded-t-lg absolute z-10 w-full bg-grey-100' style={{ top: '20vh', height: '80vh' }}>
-      <Link to='/' className='fixed z-10 top-0 left-0'> <Icon icon='house' m={4} p={4} bg='grey-100' rounded='full' /></Link>
+      <Link to='/' className='fixed z-10 top-0 left-0'> <Icon icon='house' m={4} p={4} borderWidth='default' borderColor='grey-400' bg='grey-100' rounded='full' /></Link>
       <div className='overflow-scroll'>
         <CampaignStatus campaign={data!.campaign} />
         <BottomCard>

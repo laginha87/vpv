@@ -18,7 +18,7 @@ export const CampaignStatus: FCWithFragment<{
           <Progress.Bar key={i} percentage={(quantitySupplied / quantityNeeded) * 100} />
           <div className='flex'>
             <div className='w-1/2 font-semibold'>{supply.name}</div>
-            <div className='w-1/2 text-right font-book text-grey-800'> Faltam {quantitySupplied} de {quantityNeeded}</div>
+            <div className='w-1/2 text-right font-book text-grey-800'> Faltam {quantityNeeded - quantitySupplied} de {quantityNeeded}</div>
           </div>
         </div>))}
     </div>)

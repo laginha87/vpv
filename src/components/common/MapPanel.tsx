@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react'
 
 interface Props {
-    height: number,
-    overlay?: boolean,
-    icon?: () => ReactNode,
+  height: number,
+  overlay?: boolean,
+  icon?: () => ReactNode,
 }
 
 export const MapPanel: React.FC<Props> = ({ children, height, overlay, icon }) => {
@@ -16,7 +16,7 @@ export const MapPanel: React.FC<Props> = ({ children, height, overlay, icon }) =
           {icon()}
         </div>}
 
-      <div className='overflow-scroll z-4 relative p-6 rounded-t-lg bg-grey-100'>
+      <div className='overflow-scroll z-4 relative p-6 rounded-t-lg bg-grey-100 h-full pb-40'>
         {children}
       </div>
     </div>
